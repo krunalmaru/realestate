@@ -21,7 +21,7 @@ class Builder(models.Model):
 
 class Profile(models.Model):
     name = models.CharField(max_length=100)
-
+    
 
 class Scheam(models.Model):
     CHOICE = (
@@ -48,6 +48,8 @@ class Scheam(models.Model):
     propertystatus = models.CharField(max_length=100)
     description = models.TextField()
     date = models.DateField(auto_now_add=True)
+
+
     def __str__(self):
         return self.scheamname
 

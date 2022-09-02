@@ -49,8 +49,10 @@
                     <div class="carousel-inner">
                         <div class="single-item-carousel owl-carousel owl-theme owl-dots-none">
                             <figure class="image-box"><img src="{{pr.image.url}}" alt=""></figure>
-                            <figure class="image-box"><img src="assets/images/resource/property-details-1.jpg" alt=""></figure>
-                            <figure class="image-box"><img src="assets/images/resource/property-details-1.jpg" alt=""></figure>
+                                {% for pi in pr.imageupload_set.all%}                        
+                                <figure class="image-box"><img src="{{pi.image.url}}" alt=""></figure>
+                                {% endfor %}
+                            
                         </div>
                     </div>
                     <div class="discription-box content-widget">
