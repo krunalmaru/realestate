@@ -72,8 +72,8 @@
                     </div>  
                 </div>
             </div>
-        </div> -->
-        <!-- preloader end -->
+        </div>  -->
+        <!-- preloader end-->
 
 
         <!-- switcher menu -->
@@ -83,7 +83,7 @@
             </div>
             <div class="switch_menu">
                 <!-- color changer -->
-                <div class="switcher_container">
+                 <div class="switcher_container">
                     <ul id="styleOptions" title="switch styling">
                         <li>
                             <a href="javascript: void(0)" data-theme="green" class="green-color"></a>
@@ -101,7 +101,7 @@
                             <a href="javascript: void(0)" data-theme="orange" class="orange-color"></a>
                         </li>
                     </ul>
-                </div> 
+                </div>  -->
             </div>
         </div>
         <!-- end switcher menu -->
@@ -126,10 +126,20 @@
                             <li><a href="index.html"><i class="fab fa-pinterest-p"></i></a></li>
                             <li><a href="index.html"><i class="fab fa-google-plus-g"></i></a></li>
                             <li><a href="index.html"><i class="fab fa-vimeo-v"></i></a></li>
+                            <li><a href=""><i class=""></i>{{request.user.username|capfirst}}</a></li>                            
                         </ul>
+
+                        {% if request.user.is_authenticated %}
+    
+                        <div class="sign-box">
+                            <a href="{% url 'logout' %}"><i class="fas fa-user"></i>Logout</a>
+                        </div>
+                        {% else %}
                         <div class="sign-box">
                             <a href="{% url 'login' %}"><i class="fas fa-user"></i>Sign In</a>
                         </div>
+                        {% endif %}
+
                     </div>
                 </div>
             </div>
@@ -175,7 +185,7 @@
                                                 <li><a href="agents-details.html">Agent Details</a></li>
                                             </ul>
                                         </li> 
-                                        <li class="dropdown"><a href="index.html"><span>Property</span></a>
+                                        <!-- <li class="dropdown"><a href="index.html"><span>Property</span></a>
                                             <ul>
                                                 <li><a href="property-list.html">Property List</a></li>
                                                 <li><a href="property-grid.html">Property Grid</a></li>
@@ -188,7 +198,7 @@
                                                 <li><a href="property-details-3.html">Property Details 03</a></li>
                                                 <li><a href="property-details-4.html">Property Details 04</a></li>
                                             </ul>
-                                        </li>
+                                        </li> -->
                                         <li class="dropdown"><a href="index.html"><span>Pages</span></a>
                                             <div class="megamenu">
                                                 <div class="row clearfix">
