@@ -122,6 +122,11 @@ class PropertyDetailView(View):
     def get(self, request,id  ):
         pr = Scheam.objects.get(id=id)
         return render(request,'myapp/propertydetail.html',{'pr':pr})
+
+
+def propertylist(request):
+    
+    return render(request,'myapp/propertylist.html')
        
 # def propertydetail(request):
 #     obj = Scheam.objects.get(id=id)

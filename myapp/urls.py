@@ -13,9 +13,10 @@ urlpatterns = [
     path('logout/', views.logout, name='logout'),
 
     path('contact', views.contactus, name='contact'), 
-    # path('propertydetail/<int:pk>', views.properydetail, name='propertydetail'),
+
     path('property/<int:id>/', views.PropertyDetailView.as_view(), name='propertydetail'),
-    # path('propertydetail/<int:id>/ ', views.propertydetail(), name='propertydetail')
+    
+    path('propertylist/', views.propertylist, name='propertylist')
 
     
 ] + static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)
