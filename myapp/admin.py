@@ -13,4 +13,7 @@ class ImageAdmin(admin.ModelAdmin):
 
 
 admin.site.register(ContactInquiry)
-admin.site.register(Scheam)
+@admin.register(Scheam)
+class ScheamAdmin(admin.ModelAdmin):
+    list_display = ['id','name','scheamname']
+

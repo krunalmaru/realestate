@@ -11,26 +11,25 @@
                 </div>
                 <div class="tabs-box">
                     <div class="tab-btn-box">
-                        <!-- <ul class="tab-btns tab-buttons centred clearfix">
+                        <ul class="tab-btns tab-buttons centred clearfix">
 
-                            <li class="tab-btn active-btn" data-tab="#tab-1">Agent</li>
-                            <li class="tab-btn" data-tab="#tab-2">User</li>
-                        </ul> -->
+                            <li class="tab-btn active-btn" data-tab="#tab-1" href="{% url 'buidersignup' %}">Builder</li>
+                            
+                        </ul>
                     </div>
                     <div class="tabs-content">
                         <div class="tab active-tab" id="tab-1">
                             <div class="inner-box">
-                                <h4>Sign up</h4>
-                               
+                                <h4>Sign up</h4>                              
                                 <form action="{% url 'signup' %}" method="POST" class="default-form">
                                     {% csrf_token %}
-                                     <div class="form-group">
+                                    <div class="form-group">
                                     {% for message in messages %}
                                         <div class="alert alert-danger" role="alert">
                                             {{message}}
                                         </div>
                                     {% endfor %}
-                                </div>
+                                    </div>
                                     <div class="form-group">
                                         <label>User name</label>
                                         <input type="text" name="username" required="">
@@ -58,30 +57,6 @@
                                 </div>
                             </div>
                         </div>
-                        <!-- <div class="tab" id="tab-2">
-                            <div class="inner-box">
-                                
-                                <h4>Sign up</h4>
-                                <div class="row">
-                                    <div class="col-sm-8 offset-xl-2 ">
-                                        <form action="" method="post" class="default-form">
-                                          {% csrf_token %}  
-                                          {% for fm in form %}
-                                              {{fm.errors }}
-                                              {{fm}} 
-                                           {% endfor %}
-                                           <div class="form-group message-btn">
-                                            <button type="submit" class="theme-btn btn-one">Sign up</button>
-                                            </div>
-                                        </form>
-                                       
-                                    </div>
-                                </div>
-                                <div class="othre-text">
-                                    <p>Already have an account? <a href="signin.html">Sign in</a></p>
-                                </div>
-                            </div>
-                        </div> -->
                     </div>
                 </div>
             </div>

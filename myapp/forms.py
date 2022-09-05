@@ -4,13 +4,13 @@ from django.forms import ModelForm
 from django.contrib.auth.forms import UserCreationForm
 from .models import *
 
-class BuilderForm(ModelForm):
-    name = forms.CharField(max_length=50,)
+class BuilderForm(forms.ModelForm):
+    
     password =forms.CharField(widget=forms.PasswordInput)
 
     class Meta:
         model = Builder
-        fields = ('name', 'email', 'mobile','agencyname')
+        fields = ( 'name','email', 'mobile','agencyname')
 
 
 

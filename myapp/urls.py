@@ -16,7 +16,7 @@ urlpatterns = [
 
     path('property/<int:id>/', views.PropertyDetailView.as_view(), name='propertydetail'),
     
-    path('propertylist/', views.propertylist, name='propertylist')
+    path('propertylist/', views.propertylist, name='propertylist'),
 
     
 ] + static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)

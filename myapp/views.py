@@ -17,16 +17,15 @@ def home(request):
 
 def signup(request):
     if request.method == 'POST':
-        username = request.POST['username']
-        email = request.POST['email']
-        password = request.POST['password']
-        confirmpass = request.POST['confirmpass']
+        username = request.POST.get('username')
+        email = request.POST.get('email')
+        password = request.POST.get('password')
+        confirmpass = request.POST.get('confirmpass')
 
         if password == confirmpass:
             if User.objects.filter(username=username).exists():
-                messages.info(request, 'username Already exist')
-                print("invalid")
-                return redirect('home')
+                messages.error(request, 'User Already exist')               
+                return redirect('signup')
             else:
                 myuser = User.objects.create_user(username=username, email=email, password=password)   
                 myuser.set_password(password)     
@@ -46,7 +45,7 @@ def buidersignup(request):
             return HttpResponseRedirect('/home')
     else:
         fm = BuilderForm()    
-    return render(request,'myapp/signup.html',{'form':fm})
+    return render(request,'myapp/builder.html',{'form':fm})
 
 def userlogin(request):
     if request.method == 'POST':
@@ -75,24 +74,6 @@ def logout(request):
     return redirect('login')
 
 
-
-# def signup(request):
-
-#     if request.method =='POST':
-#         form = UsercreateForm(request.POST)
-#         if form.is_valid():
-#             new_user = form.save()
-#             new_user = authenticate(
-#                 username = form.cleaned_data['username'],
-#                 password = form.cleaned_data['password1'],
-#             )
-#             login(request,new_user)
-#             return redirect('home')
-#     else:
-#         form = UsercreateForm()
-#     context = {'form':form}
-#     return render(request, 'registration/signup.html',context)
-
 def contactus(request):
     if request.method == "POST":
         name = request.POST.get('username')
@@ -105,19 +86,6 @@ def contactus(request):
     
     return render(request,'myapp/contact.html')
 
-# def properydetail(request,pk):
-#     property = Property.objects.all()
-#     scheam = Property.objects.get(pk)
-   
-#     propertyid = request.GET.get('property')
-#     scheamid = request.GET.get('scheam')
-#     if propertyid:
-#         pr = Property.objects.filter(pro=propertyid)
-    
-#     context = {'property':property, 'scheam':scheam}
-#     return render(request, 'myapp/propertydetail.html',context)
-
-
 class PropertyDetailView(View):
     def get(self, request,id  ):
         pr = Scheam.objects.get(id=id)
@@ -125,8 +93,10 @@ class PropertyDetailView(View):
 
 
 def propertylist(request):
-    
-    return render(request,'myapp/propertylist.html')
+    sc = Scheam.objects.all()
+    context = {'sc':sc}
+
+    return render(request,'myapp/propertylist.html',context)
        
 # def propertydetail(request):
 #     obj = Scheam.objects.get(id=id)
