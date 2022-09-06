@@ -19,9 +19,15 @@ class Builder(models.Model):
     def __str__(self):
         return self.name
 
+class profile(models.Model):
+    name = models.ForeignKey(Builder,on_delete=models.CASCADE)
+    profileimg = models.ImageField(upload_to='image/profile')
+    address = models.TextField()
+    
+
 class Profile(models.Model):
     name = models.CharField(max_length=100)
-    
+
 
 class Scheam(models.Model):
     CHOICE = (
@@ -36,18 +42,18 @@ class Scheam(models.Model):
     image = models.ImageField(upload_to='image')
     name = models.ForeignKey(Builder, on_delete=models.CASCADE)
     scheamname =models.CharField(max_length=100)
-    location = models.CharField(max_length=200) 
-    price = models.CharField(max_length=100, default='')
-    propertytype = models.CharField(choices= CHOICE,max_length=100)
-    
+    location = models.CharField(max_length=200,default='') 
+    price = models.CharField(max_length=100)
+    propertytype = models.CharField(choices= CHOICE,max_length=100,default='')
     size = models.CharField(max_length=500)
-    rooms = models.IntegerField()
+    rooms = models.IntegerField(default='')
     bedrooms = models.IntegerField(blank=True,null=True)
-    bathroom = models.IntegerField(blank=True)
+    bathroom = models.IntegerField(blank=True, default='')
     builtyear = models.DateField()
-    propertystatus = models.CharField(max_length=100)
+    propertystatus = models.CharField(max_length=100,default='')
     description = models.TextField()
     date = models.DateField(auto_now_add=True)
+    is_feature = models.BooleanField(default=False, )
 
 
     def __str__(self):

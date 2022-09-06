@@ -164,31 +164,22 @@
                                         <li class="current dropdown"><a href="{% url 'home' %}"><span>Home</span></a>
                                             <ul>
                                                 <li><a href="{% url 'home' %}">Main Home</a></li>
-                                                <li><a href="index-2.html">Home Modern</a></li>
-                                                <li><a href="index-3.html">Home Map</a></li>
-                                                <li><a href="index-4.html">Home Half Map</a></li>
-                                                <li><a href="index-5.html">Home Agent</a></li>
-                                                <li><a href="index-onepage.html">OnePage Home</a></li>
-                                                <li><a href="index-rtl.html">RTL Home</a></li>
-                                                <li class="dropdown"><a href="index.html">Header Style</a>
-                                                    <ul>
-                                                        <li><a href="index.html">Header Style 01</a></li>
-                                                        <li><a href="index-2.html">Header Style 02</a></li>
-                                                        <li><a href="index-3.html">Header Style 03</a></li>
-                                                    </ul>
+                                                <!-- <li><a href="index-5.html">Home Agent</a></li> -->
+                                                <!-- <li><a href="index-rtl.html">RTL Home</a></li> -->
+                                               
                                                 </li>
                                             </ul>
                                         </li>
                                         <li class="dropdown"><a href="index.html"><span>Listing</span></a>
                                             <ul>
-                                                <li><a href="agents-list.html">Agents List</a></li>
+                                                <li><a href="{% url 'builderlist' %}">Agents List</a></li>
                                                 <li><a href="agents-grid.html">Agents Grid</a></li>
                                                 <li><a href="agents-details.html">Agent Details</a></li>
                                             </ul>
                                         </li> 
-                                        <!-- <li class="dropdown"><a href="index.html"><span>Property</span></a>
+                                        <li class="dropdown"><a href="index.html"><span>Property</span></a>
                                             <ul>
-                                                <li><a href="property-list.html">Property List</a></li>
+                                                <li><a href="{% url 'propertylist'%}">Property List</a></li>
                                                 <li><a href="property-grid.html">Property Grid</a></li>
                                                 <li><a href="property-list-2.html">Property List Full View</a></li>
                                                 <li><a href="property-grid-2.html">Property Grid Full View</a></li>
@@ -199,7 +190,7 @@
                                                 <li><a href="property-details-3.html">Property Details 03</a></li>
                                                 <li><a href="property-details-4.html">Property Details 04</a></li>
                                             </ul>
-                                        </li> -->
+                                        </li>
                                         <li class="dropdown"><a href="index.html"><span>Pages</span></a>
                                             <div class="megamenu">
                                                 <div class="row clearfix">
@@ -247,7 +238,7 @@
                                         </li> 
                                         <li class="dropdown"><a href="index.html"><span>Agency</span></a>
                                             <ul>
-                                                <li><a href="agency-list.html">Agency List</a></li>
+                                                <li><a href="">Agency List</a></li>
                                                 <li><a href="agency-grid.html">Agency Grid</a></li>
                                                 <li><a href="agency-details.html">Agency Details</a></li>
                                             </ul>
@@ -266,23 +257,23 @@
             </div>
 
             <!--sticky Header-->
-            <div class="sticky-header">
+            <!-- <div class="sticky-header">
                 <div class="outer-box">
                     <div class="main-box">
                         <div class="logo-box">
                             <figure class="logo"><a href=""><img src="{% static 'myapp/images/logo.png' %}" alt=""></a></figure>
                         </div>
                         <div class="menu-area clearfix">
-                            <nav class="main-menu clearfix">
+                            <nav class="main-menu clearfix"> -->
                                 <!--Keep This Empty / Menu will come through Javascript-->
-                            </nav>
+                            <!-- </nav>
                         </div>
                         <div class="btn-box">
                             <a href="index.html" class="theme-btn btn-one"><span>+</span>Add Listing</a>
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> -->
         </header>
         <!-- main-header end -->
 
@@ -444,13 +435,13 @@
 
         <!-- download-section -->
         <section class="download-section bg-color-3">
-            <div class="pattern-layer" style="background-image: url(assets/images/shape/shape-3.png);"></div>
+            <div class="pattern-layer"><img src="{% static 'myapp/images/shape/shape-3.png' %}"></div>
             <div class="auto-container">
                 <div class="row clearfix">
                     <div class="col-lg-6 col-md-6 col-sm-12 image-column">
                         <div class="image-box">
-                            <figure class="image image-1 wow fadeInUp animated" data-wow-delay="00ms" data-wow-duration="1500ms"><img src="assets/images/resource/download-1.png" alt=""></figure>
-                            <figure class="image image-2 wow fadeInUp animated" data-wow-delay="300ms" data-wow-duration="1500ms"><img src="assets/images/resource/download-2.png" alt=""></figure>
+                            <figure class="image image-1 wow fadeInUp animated" data-wow-delay="00ms" data-wow-duration="1500ms"><img src="{% static 'myapp/images/resource/download-1.png' %}" alt=""></figure>
+                            <figure class="image image-2 wow fadeInUp animated" data-wow-delay="300ms" data-wow-duration="1500ms"><img src="{% static 'myapp/images/resource/download-2.png' %} " alt=""></figure>
                         </div>
                     </div>
                     <div class="col-lg-6 col-md-6 col-sm-12 content-column">

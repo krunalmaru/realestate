@@ -7,11 +7,12 @@ from django.contrib import auth
 from django.contrib import messages
 from .forms import BuilderForm
 from  django.views import View
+from django.core.paginator import Paginator
 # makeCreate your views here.
 
 
 def home(request):
-    obj = Scheam.objects.all()   
+    obj = Scheam.objects.filter(is_feature = True).order_by('-id')
     context = {'obj':obj }       
     return render(request ,'myapp/home.html', context)
 
@@ -73,6 +74,18 @@ def logout(request):
     auth.logout(request)
     return redirect('login')
 
+def profile(request):
+    return render(request, 'myapp/profile.html')
+
+def builderdetail(request):
+    obj = Scheam.objects.filter(is_feature = True).order_by('-id')
+    builder = Builder.objects.all().order_by('id')
+    paginator = Paginator(builder, 1)
+    page_number = request.GET.get('page')
+    bui = paginator.get_page(page_number)
+    context = {'builder':bui,'obj':obj}
+    return render(request, 'myapp/builderlist.html',context)
+
 
 def contactus(request):
     if request.method == "POST":
@@ -93,8 +106,12 @@ class PropertyDetailView(View):
 
 
 def propertylist(request):
-    sc = Scheam.objects.all()
-    context = {'sc':sc}
+    scheam = Scheam.objects.all().order_by('id')
+    paginator = Paginator(scheam, 1, orphans=1)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+    
+    context = {'page_obj':page_obj}
 
     return render(request,'myapp/propertylist.html',context)
        

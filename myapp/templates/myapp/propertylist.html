@@ -541,7 +541,7 @@
                 </div>
                 <div class="wrapper list">
                     <div class="deals-list-content list-item">
-                        {% for i in sc %}
+                        {% for i in page_obj %}
                         <div class="deals-block-one">
                             <div class="inner-box">
                                 <div class="image-box">
@@ -555,7 +555,7 @@
                                     <div class="price-box clearfix">
                                         <div class="price-info pull-left">
                                             <h6>Start From</h6>
-                                            <h4>${{i.price}}</h4>
+                                            <h4>{{i.price}}</h4>
                                         </div>
                                         <div class="author-box pull-right">
                                             <figure class="author-thumb"> 
@@ -566,7 +566,7 @@
                                     </div>
                                     <p>{{i.description}}</p>
                                     <ul class="more-details clearfix">
-                                        <li><i class="icon-14"></i>{{i.bedrooms}} Beds</li>
+                                        <li><i class="icon-14"></i>{{i.bedrooms}}</li>
                                         <li><i class="icon-15"></i>{{i.bathroom}} </li>
                                         <li><i class="icon-16"></i>{{i.size}}Sq Ft </li>
                                     </ul>
@@ -582,9 +582,10 @@
                         </div>
                         {% endfor %}
                     </div>
-                    <div class="deals-grid-content">
+                    <!-- <div class="deals-grid-content">
                         <div class="row clearfix">
                             <div class="col-lg-6 col-md-6 col-sm-12 feature-block">
+                                {% for obj in page_obj %}
                                 <div class="feature-block-one">
                                     <div class="inner-box">
                                         <div class="image-box">
@@ -596,31 +597,32 @@
                                             <div class="author-info clearfix">
                                                 <div class="author pull-left">
                                                     <figure class="author-thumb"><img src="assets/images/feature/author-1.jpg" alt=""></figure>
-                                                    <h6>Michael Bean</h6>
+                                                    <h6>{{obj.name}}</h6>
                                                 </div>
                                                 <div class="buy-btn pull-right"><a href="property-details.html">For Buy</a></div>
                                             </div>
-                                            <div class="title-text"><h4><a href="property-details.html">Villa on Grand Avenue</a></h4></div>
+                                            <div class="title-text"><h4><a href="property-details.html">{{obj.scheamname}}</a></h4></div>
                                             <div class="price-box clearfix">
                                                 <div class="price-info pull-left">
                                                     <h6>Start From</h6>
-                                                    <h4>$30,000.00</h4>
+                                                    <h4>${{obj.price}</h4>
                                                 </div>
                                                 <ul class="other-option pull-right clearfix">
                                                     <li><a href="property-details.html"><i class="icon-12"></i></a></li>
                                                     <li><a href="property-details.html"><i class="icon-13"></i></a></li>
                                                 </ul>
                                             </div>
-                                            <p>Lorem ipsum dolor sit amet consectetur adipisicing sed.</p>
+                                            <p>{{obj.description}}</p>
                                             <ul class="more-details clearfix">
-                                                <li><i class="icon-14"></i>3 Beds</li>
-                                                <li><i class="icon-15"></i>2 Baths</li>
-                                                <li><i class="icon-16"></i>600 Sq Ft</li>
+                                                <li><i class="icon-14"></i>{{obj.bedrooms}}</li>
+                                                <li><i class="icon-15"></i>{{obj.bathroom}}</li>
+                                                <li><i class="icon-16"></i>{{obj.size}}Sq Ft</li>
                                             </ul>
                                             <div class="btn-box"><a href="property-details.html" class="theme-btn btn-two">See Details</a></div>
                                         </div>
                                     </div>
                                 </div>
+                                {% endfor %}
                             </div>
                             <div class="col-lg-6 col-md-6 col-sm-12 feature-block">
                                 <div class="feature-block-one">
@@ -813,14 +815,18 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div> -->
                 </div>
+
                 <div class="pagination-wrapper">
                     <ul class="pagination clearfix">
-                        <li><a href="property-list-3.html" class="current">1</a></li>
-                        <li><a href="property-list-3.html">2</a></li>
-                        <li><a href="property-list-3.html">3</a></li>
-                        <li><a href="property-list-3.html"><i class="fas fa-angle-right"></i></a></li>
+                        {% if page_obj.has_previous %}
+                        <li><a href="?page={{page_obj.previous_page_number}}" class="current">prev</a></li>
+                        {% endif %}
+                        <li><a href="">{{page_obj.number}}</a></li>
+                        {% if page_obj.has_next %}
+                            <li><a href="?page={{page_obj.next_page_number}}" >next</a></li>
+                        {% endif %}
                     </ul>
                 </div>
             </div>
