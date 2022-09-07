@@ -12,7 +12,7 @@ urlpatterns = [
     path('buiderlogin/', views.buiderlogin, name='builderlogin'),
     path('logout/', views.logout, name='logout'),
     path('profile/', views.profile, name='profile'),
-    path('contact', views.contactus, name='contact'), 
+    path('contact/', views.contactus, name='contact'), 
 
     path('property/<int:id>/', views.PropertyDetailView.as_view(), name='propertydetail'),
     

@@ -4,12 +4,6 @@ from django import forms
 import datetime
 # Create your models here.
 
-# class User(AbstractUser):
-#     is_admin = models.BooleanField(default=False)
-#     is_builder = models.BooleanField(default=False)
-#     is_user = models.BooleanField(default=False)
-
-
 class Builder(models.Model):
     name = models.CharField(max_length=100)
     email = models.EmailField(default='') 
@@ -19,15 +13,14 @@ class Builder(models.Model):
     def __str__(self):
         return self.name
 
-class profile(models.Model):
-    name = models.ForeignKey(Builder,on_delete=models.CASCADE)
-    profileimg = models.ImageField(upload_to='image/profile')
-    address = models.TextField()
-    
-
 class Profile(models.Model):
-    name = models.CharField(max_length=100)
+    profileimg = models.ImageField(upload_to='image/profile')
+    name = models.ForeignKey(Builder,on_delete=models.CASCADE)
+    address = models.CharField(max_length=1000,default='')
+    city = models.CharField(max_length=100)
+    zipcode = models.IntegerField()
 
+    
 
 class Scheam(models.Model):
     CHOICE = (

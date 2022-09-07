@@ -12,8 +12,14 @@ class ImageAdmin(admin.ModelAdmin):
     list_display = ['id','scheam','image']
 
 
-admin.site.register(ContactInquiry)
+
+@admin.register(Profile)
+class ProfileAdmin(admin.ModelAdmin):
+    list_display = ['id','name','address','city','zipcode','profileimg']
+
+
 @admin.register(Scheam)
 class ScheamAdmin(admin.ModelAdmin):
     list_display = ['id','name','scheamname','is_feature']
 
+admin.site.register(ContactInquiry)

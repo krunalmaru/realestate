@@ -12,7 +12,7 @@ from django.core.paginator import Paginator
 
 
 def home(request):
-    obj = Scheam.objects.filter(is_feature = True).order_by('-id')
+    obj = Scheam.objects.filter(is_feature = True).order_by('id')
     context = {'obj':obj }       
     return render(request ,'myapp/home.html', context)
 
@@ -102,7 +102,8 @@ def contactus(request):
 class PropertyDetailView(View):
     def get(self, request,id  ):
         pr = Scheam.objects.get(id=id)
-        return render(request,'myapp/propertydetail.html',{'pr':pr})
+        ab = Builder.objects.all()
+        return render(request,'myapp/propertydetail.html',{'pr':pr,'ab':ab})
 
 
 def propertylist(request):
