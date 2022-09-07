@@ -15,7 +15,8 @@ class Builder(models.Model):
 
 class Profile(models.Model):
     profileimg = models.ImageField(upload_to='image/profile')
-    name = models.ForeignKey(Builder,on_delete=models.CASCADE)
+    name = models.OneToOneField(Builder,on_delete=models.CASCADE)
+    mobile = models.CharField(max_length=15)
     address = models.CharField(max_length=1000,default='')
     city = models.CharField(max_length=100)
     zipcode = models.IntegerField()

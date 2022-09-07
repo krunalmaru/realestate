@@ -1,7 +1,7 @@
 from django.shortcuts import render,redirect, HttpResponse
 from django.http import HttpResponseRedirect
 from django.contrib.auth import authenticate,login,logout
-from .models import ContactInquiry,Builder,Scheam
+from .models import ContactInquiry,Builder,Scheam,Profile
 from django.contrib.auth.models import User
 from django.contrib import auth
 from django.contrib import messages
@@ -74,8 +74,10 @@ def logout(request):
     auth.logout(request)
     return redirect('login')
 
-def profile(request):
-    return render(request, 'myapp/profile.html')
+def profile(request,id):
+    pro = Profile.objects.get(id=id)
+    context = {'pro':pro}
+    return render(request, 'myapp/profile.html',context)
 
 def builderdetail(request):
     obj = Scheam.objects.filter(is_feature = True).order_by('-id')
@@ -102,8 +104,10 @@ def contactus(request):
 class PropertyDetailView(View):
     def get(self, request,id  ):
         pr = Scheam.objects.get(id=id)
-        ab = Builder.objects.all()
-        return render(request,'myapp/propertydetail.html',{'pr':pr,'ab':ab})
+        print(pr)
+        ab = Profile.objects.all()
+        aj = Builder.objects.all()
+        return render(request,'myapp/propertydetail.html',{'pr':pr,'ab':ab,'aj':aj})
 
 
 def propertylist(request):
