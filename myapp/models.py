@@ -5,23 +5,18 @@ import datetime
 # Create your models here.
 
 class Builder(models.Model):
+    profileimg = models.ImageField(upload_to='image/profile')
     name = models.CharField(max_length=100)
     email = models.EmailField(default='') 
-    mobile = models.CharField(max_length=15)
-    agencyname = models.CharField(max_length=100)   
-    
-    def __str__(self):
-        return self.name
-
-class Profile(models.Model):
-    profileimg = models.ImageField(upload_to='image/profile')
-    name = models.OneToOneField(Builder,on_delete=models.CASCADE)
     mobile = models.CharField(max_length=15)
     address = models.CharField(max_length=1000,default='')
     city = models.CharField(max_length=100)
     zipcode = models.IntegerField()
-
+    agencyname = models.CharField(max_length=100)   
     
+    def __str__(self):
+        return self.name
+  
 
 class Scheam(models.Model):
     CHOICE = (
