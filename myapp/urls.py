@@ -12,10 +12,10 @@ urlpatterns = [
     path('buiderlogin/', views.buiderlogin, name='builderlogin'),
     path('logout/', views.logout, name='logout'),
     path('contact/', views.contactus, name='contact'), 
-
+    path('builderdetail/<int:id>/', views.builderdetail, name='builderdetail'),
     path('property/<int:id>/', views.PropertyDetailView.as_view(), name='propertydetail'),
-    
+    path('addscheam/', views.addscheam, name='addscheam'),
     path('propertylist/', views.propertylist, name='propertylist'),
-    path('buiderlist/' , views.builderdetail, name='builderlist'),
+    path('builderlist/' , views.builderlist, name='builderlist'),
     
 ] + static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)

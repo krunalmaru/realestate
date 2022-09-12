@@ -35,9 +35,10 @@ class Scheam(models.Model):
     price = models.CharField(max_length=100)
     propertytype = models.CharField(choices= CHOICE,max_length=100,default='')
     size = models.CharField(max_length=500)
-    rooms = models.IntegerField(default='')
+    storeroom = models.IntegerField(blank=True,null=True,default='')
     bedrooms = models.IntegerField(blank=True,null=True)
-    bathroom = models.IntegerField(blank=True, default='')
+    bathroom = models.IntegerField(blank=True, null=True, default='')
+    amenites = models.CharField(max_length=100)
     builtyear = models.DateField()
     propertystatus = models.CharField(max_length=100,default='')
     description = models.TextField()
@@ -52,6 +53,7 @@ class Scheam(models.Model):
 class ImageUpload(models.Model):
     scheam = models.ForeignKey(Scheam, on_delete=models.CASCADE)
     image = models.ImageField(upload_to = 'image/scheam' )
+    # floorplan = models.ImageField(upload_to = 'image/scheam/floorplan')
 
     def __str__(self):
         return self.scheam.scheamname

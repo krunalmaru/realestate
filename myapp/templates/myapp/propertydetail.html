@@ -62,17 +62,17 @@
                         <div class="text">
                             <p>{{pr.description}}</p>
                             <p>Excepteur sint occaecat cupidatat non proident sunt in culpa qui officia deserunt mollit anim  est laborum. Sed perspiciatis unde omnis iste natus error sit voluptatem accusantium dolore mque laudantium totam rem aperiam.</p>
+                            <p>{{pr.amenites}}</p>
                         </div>
                     </div>
                     <div class="details-box content-widget">
                         <div class="title-box">
                             <h4>Property Details</h4>
                         </div>
+                        
                         <ul class="list clearfix">
-                            <li>Property ID: <span>ZOP251C</span></li>
-                            <li>Rooms: <span>{{pr.rooms}}</span></li>
-                            <li>Garage Size: <span>{{pr.size}} Sq Ft</span></li>
-                            <li>Property Price: <span>${{pr.price}}</span></li>
+                            <li>StoreRooms: <span>{{pr.storeroom}}</span></li>
+                            <li>Property Price: <span>Rs.{{pr.price}}</span></li>
                             <li>Bedrooms: <span>{{pr.bedrooms}}</span></li>
                             <li>Year Built: <span>{{pr.date}}</span></li>
                             <li>Property Type: <span>{{pr.propertytype}}</span></li>
@@ -86,6 +86,8 @@
                             <h4>Amenities</h4>
                         </div>
                         <ul class="list clearfix">
+                          
+                            {{pr.amenites}}
                             <li>Air Conditioning</li>
                             <li>Cleaning Service</li>
                             <li>Dishwasher</li>
@@ -370,7 +372,7 @@
                                     <li><i class="fas fa-phone"></i><a href="tel:03030571965">{{pr.name.mobile}}</a></li>
                                 </ul>
                             
-                                <div class="btn-box"><a href="agents-details.html">View Listing</a></div>
+                                <div class="btn-box"><a href="{% url 'builderdetail' pr.name.id %}">View Listing</a></div>
                             </div>
                         </div>
                         <div class="form-inner">
@@ -443,7 +445,7 @@
                     <div class="feature-block-one wow fadeInUp animated" data-wow-delay="00ms" data-wow-duration="1500ms">
                         <div class="inner-box">
                             <div class="image-box">
-                                <figure class="image"><img src="{{i.image.url}}" alt=""></figure>
+                                <figure class="image-box"><img src="{{i.image.url}}" alt=""></figure>
                                 <div class="batch"><i class="icon-11"></i></div>
                                 <span class="category">Featured</span>
                             </div>

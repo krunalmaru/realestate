@@ -15,6 +15,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
 
 <!-- Stylesheets -->
+
 <link href="{% static 'myapp/css/font-awesome-all.css' %}" rel="stylesheet">
 <link href="{% static 'myapp/css/flaticon.css' %}" rel="stylesheet">
 <link href="{% static 'myapp/css/owl.css' %} " rel="stylesheet">
@@ -27,6 +28,10 @@
 <link href="{% static 'myapp/css/switcher-style.css' %}" rel="stylesheet">
 <link href="{% static 'myapp/css/style.css' %}" rel="stylesheet">
 <link href="{% static 'myapp/css/responsive.css' %}" rel="stylesheet">
+
+
+
+
 
 
 
@@ -170,28 +175,19 @@
                                                 </li>
                                             </ul>
                                         </li>
-                                        <li class="dropdown"><a href="index.html"><span>Listing</span></a>
+                                        <li class="dropdown"><a href="{% url 'home' %}"><span>Listing</span></a>
                                             <ul>
                                                 <li><a href="{% url 'builderlist' %}">Agents List</a></li>
-                                                <li><a href="agents-grid.html">Agents Grid</a></li>
-                                                <li><a href="agents-details.html">Agent Details</a></li>
+                                               
+                                               
                                             </ul>
                                         </li> 
                                         <li class="dropdown"><a href="index.html"><span>Property</span></a>
                                             <ul>
                                                 <li><a href="{% url 'propertylist'%}">Property List</a></li>
-                                                <li><a href="property-grid.html">Property Grid</a></li>
-                                                <li><a href="property-list-2.html">Property List Full View</a></li>
-                                                <li><a href="property-grid-2.html">Property Grid Full View</a></li>
-                                                <li><a href="property-list-3.html">Property List Half View</a></li>
-                                                <li><a href="property-grid-3.html">Property Grid Half View</a></li>
-                                                <li><a href="property-details.html">Property Details 01</a></li>
-                                                <li><a href="property-details-2.html">Property Details 02</a></li>
-                                                <li><a href="property-details-3.html">Property Details 03</a></li>
-                                                <li><a href="property-details-4.html">Property Details 04</a></li>
                                             </ul>
                                         </li>
-                                        <li class="dropdown"><a href="index.html"><span>Pages</span></a>
+                                        <li class="dropdown"><a href="{% url 'home' %}"><span>Pages</span></a>
                                             <div class="megamenu">
                                                 <div class="row clearfix">
                                                     <div class="col-xl-4 column">
@@ -211,7 +207,7 @@
                                                         <ul>
                                                             <li><h4>Pages</h4></li>
                                                             <li><a href="gallery.html">Our Gallery</a></li>
-                                                            <li><a href="profile.html">My Profile</a></li>
+                                                            <li><a href="{% url 'addscheam'%}">Add Scheam</a></li>
                                                             <li><a href="signin.html">Sign In</a></li>
                                                             <li><a href="signup.html">Sign Up</a></li>
                                                             <li><a href="error.html">404</a></li>
@@ -236,22 +232,22 @@
                                                 </div>                                        
                                             </div>
                                         </li> 
-                                        <li class="dropdown"><a href="index.html"><span>Agency</span></a>
+                                        <!-- <li class="dropdown"><a href="index.html"><span>Agency</span></a>
                                             <ul>
                                                 <li><a href="">Agency List</a></li>
                                                 <li><a href="agency-grid.html">Agency Grid</a></li>
                                                 <li><a href="agency-details.html">Agency Details</a></li>
                                             </ul>
-                                        </li>
+                                        </li> -->
                                           
                                         <li><a href="{% url 'contact' %}"><span>Contact</span></a></li>   
                                     </ul>
                                 </div>
                             </nav>
                         </div>
-                        <div class="btn-box">
-                            <a href="index.html" class="theme-btn btn-one"><span>+</span>Add Listing</a>
-                        </div>
+                        <!-- <div class="btn-box">
+                            <a href="{% url 'home' %}" class="theme-btn btn-one"><span>+</span>Add Listing</a>
+                        </div> -->
                     </div>
                 </div>
             </div>
@@ -581,9 +577,12 @@
     <script src="{% static 'myapp/js/jquery-ui.js"></script>
     <script src="{% static 'myapp/js/nav-tool.js"></script>
     
+   
 
     <!-- main-js -->
     <script src="{% static 'myapp/js/script.js' %}"></script>
+
+    
 
 </body><!-- End of .page_wrapper -->
 </html>

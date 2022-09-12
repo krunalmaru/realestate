@@ -5,7 +5,7 @@ from .models import ContactInquiry,Builder,Scheam
 from django.contrib.auth.models import User
 from django.contrib import auth
 from django.contrib import messages
-from .forms import BuilderForm
+from .forms import BuilderForm, AddscheamForm
 from  django.views import View
 from django.core.paginator import Paginator
 # makeCreate your views here.
@@ -75,7 +75,7 @@ def logout(request):
     return redirect('login')
 
 
-def builderdetail(request):
+def builderlist(request):
     obj = Scheam.objects.filter(is_feature = True).order_by('-id')
     builder = Builder.objects.all().order_by('id')
     paginator = Paginator(builder, 1)
@@ -83,6 +83,19 @@ def builderdetail(request):
     bui = paginator.get_page(page_number)
     context = {'builder':bui,'obj':obj}
     return render(request, 'myapp/builderlist.html',context)
+
+
+def builderdetail(request,id):
+    bui = Builder.objects.get(id=id)
+    print(bui)
+    sc = Scheam.objects.filter(name=bui).filter(propertytype='Residential')
+    com = Scheam.objects.filter(name=bui).filter(propertytype='Commercial')
+    off = Scheam.objects.filter(name=bui).filter(propertytype='Office')
+    ind = Scheam.objects.filter(name=bui).filter(propertytype='Industrial')
+    app = Scheam.objects.filter(name=bui).filter(propertytype='Appartment')
+
+    context = {'bui':bui,'sc':sc,'com':com,'off':off,'ind':ind,'app':app}
+    return render (request, 'myapp/builderdetail.html',context)
 
 
 def contactus(request):
@@ -100,21 +113,41 @@ def contactus(request):
 class PropertyDetailView(View):
     def get(self, request,id ):
         pr = Scheam.objects.get(id=id)
-        aj = Scheam.objects.all()
-        return render(request,'myapp/propertydetail.html',{'pr':pr,'aj':aj})
+        print(pr)
+        aj = Scheam.objects.all()       
+        context = {'pr':pr,'aj':aj}
+        return render(request,'myapp/propertydetail.html',context)
 
 
 def propertylist(request):
     scheam = Scheam.objects.all().order_by('id')
     paginator = Paginator(scheam, 1, orphans=1)
     page_number = request.GET.get('page')
-    page_obj = paginator.get_page(page_number)
-    
+    page_obj = paginator.get_page(page_number)    
     context = {'page_obj':page_obj}
 
     return render(request,'myapp/propertylist.html',context)
-       
-# def propertydetail(request):
-#     obj = Scheam.objects.get(id=id)
-#     return render(request,'myapp/propertydetail.html',{'jj':obj})
 
+def addscheam(request):
+    if request.method == 'POST':
+        form = AddscheamForm(request.POST, request.FILES)
+        print(type(request.POST))
+        print(request.POST.keys())
+        print(request.POST)
+        if form.is_valid():
+            form.save() 
+        
+            messages.success(request, 'Data Save successfully!!')
+            form = AddscheamForm()
+            return redirect('/addscheam')
+           
+        else:
+            print('form error',form.errors)
+   
+        print('this is post ')
+        # return redirect('/')
+    else:
+        form = AddscheamForm()
+        print("this is get")
+    return render(request, 'myapp/addscheam.html',{'form':form})
+  

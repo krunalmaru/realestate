@@ -14,6 +14,6 @@ class ImageAdmin(admin.ModelAdmin):
 
 @admin.register(Scheam)
 class ScheamAdmin(admin.ModelAdmin):
-    list_display = ['id','name','scheamname','is_feature']
+    list_display = ['id','name','scheamname','is_feature','amenites','builtyear','date','image']
 
 admin.site.register(ContactInquiry)
