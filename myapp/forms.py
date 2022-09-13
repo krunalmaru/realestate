@@ -6,14 +6,17 @@ from .models import Scheam,Builder
 import datetime
 
 
+class UserSignupform(forms.ModelForm):
+    class Meta:
+        model = User
+        fields = '__all__'
 
 class BuilderForm(forms.ModelForm):
-    
-    password =forms.CharField(widget=forms.PasswordInput)
-
+    password = forms.CharField(widget=forms.PasswordInput)
+    confirmpass =forms.CharField(label = 'Confirm Password',widget=forms.PasswordInput)
     class Meta:
         model = Builder
-        fields = ( 'name','email', 'mobile','agencyname')
+        fields = ( 'name','email', 'mobile','agencyname','address','city','zipcode','password','confirmpass')
 
 
 CHOICES = [
@@ -32,9 +35,7 @@ CHOICES = [
 
 class AddscheamForm(forms.ModelForm):
     amenites = forms.MultipleChoiceField(label="Amenities",choices=CHOICES, widget=forms.CheckboxSelectMultiple)
-
-
     class Meta:
         model = Scheam
-        fields = ('image','name','scheamname','location','price','propertytype','size','storeroom','bedrooms','bathroom','builtyear','propertystatus','description','is_feature')
+        fields = ('image','name','scheamname','location','price','propertytype','size','amenites','storeroom','bedrooms','bathroom','builtyear','propertystatus','description','is_feature')
         

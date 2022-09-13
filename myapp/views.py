@@ -12,7 +12,11 @@ from django.core.paginator import Paginator
 
 
 def home(request):
-    obj = Scheam.objects.filter(is_feature = True).order_by('id')
+    if 'search-field' in request.GET:
+        obj=request.GET['search-field']
+        obj=Scheam.objects.filter(scheamname_icontains=obj).order_by('-id')
+    else:    
+        obj = Scheam.objects.filter(is_feature = True).order_by('id')
     context = {'obj':obj }       
     return render(request ,'myapp/home.html', context)
 
@@ -43,10 +47,11 @@ def buidersignup(request):
         fm = BuilderForm(request.POST)
         if fm.is_valid():
             fm.save()
-            return HttpResponseRedirect('/home')
+            messages.success(request,'your account created successfully')
+            return HttpResponseRedirect('/builderlogin')
     else:
         fm = BuilderForm()    
-    return render(request,'myapp/builder.html',{'form':fm})
+    return render(request,'myapp/buildersignup.html',{'form':fm})
 
 def userlogin(request):
     if request.method == 'POST':
@@ -121,8 +126,8 @@ class PropertyDetailView(View):
 
 def propertylist(request):
     scheam = Scheam.objects.all().order_by('id')
-    paginator = Paginator(scheam, 1, orphans=1)
-    page_number = request.GET.get('page')
+    paginator = Paginator(scheam, 3, orphans=1)
+    page_number = request.GET.get('page',1)
     page_obj = paginator.get_page(page_number)    
     context = {'page_obj':page_obj}
 
@@ -136,7 +141,7 @@ def addscheam(request):
         print(request.POST)
         if form.is_valid():
             form.save() 
-        
+            print('amenities',form.cleaned_data['amenites'])
             messages.success(request, 'Data Save successfully!!')
             form = AddscheamForm()
             return redirect('/addscheam')

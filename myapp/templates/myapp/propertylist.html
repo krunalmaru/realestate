@@ -555,11 +555,11 @@
                                     <div class="price-box clearfix">
                                         <div class="price-info pull-left">
                                             <h6>Start From</h6>
-                                            <h4>{{i.price}}</h4>
+                                            <h4>Rs.{{i.price}}</h4>
                                         </div>
                                         <div class="author-box pull-right">
                                             <figure class="author-thumb"> 
-                                                <img src="assets/images/feature/author-1.jpg" alt="">
+                                                <img src="{{i.name.profileimg.url}}" alt="">
                                                 <span>{{i.name}}</span>
                                             </figure>
                                         </div>
@@ -571,7 +571,7 @@
                                         <li><i class="icon-16"></i>{{i.size}}Sq Ft </li>
                                     </ul>
                                     <div class="other-info-box clearfix">
-                                        <div class="btn-box pull-left"><a href="property-details.html" class="theme-btn btn-two">See Details</a></div>
+                                        <div class="btn-box pull-left"><a href="{% url 'propertydetail' i.id%}" class="theme-btn btn-two">See Details</a></div>
                                         <ul class="other-option pull-right clearfix">
                                             <li><a href="property-details.html"><i class="icon-12"></i></a></li>
                                             <li><a href="property-details.html"><i class="icon-13"></i></a></li>
@@ -821,11 +821,18 @@
                 <div class="pagination-wrapper">
                     <ul class="pagination clearfix">
                         {% if page_obj.has_previous %}
-                        <li><a href="?page={{page_obj.previous_page_number}}" class="current">prev</a></li>
+                        <li ><a class="" href="?page={{page_obj.previous_page_number}}" class="current">prev</a></li>
                         {% endif %}
-                        <li><a href="">{{page_obj.number}}</a></li>
+                        {% for i in page_obj.paginator.page_range %}
+                        {% if page_obj.number == i %}
+                        <li class="active"><a class="current" href="#">{{i}}</a></li>
+                        {% else %}
+                        <li ><a href="?page={{i}}">{{i}}</a></li>
+
+                        {% endif %}
+                        {% endfor %}
                         {% if page_obj.has_next %}
-                            <li><a href="?page={{page_obj.next_page_number}}" >next</a></li>
+                            <li><a class="" href="?page={{page_obj.next_page_number}}" >next</a></li>
                         {% endif %}
                     </ul>
                 </div>
