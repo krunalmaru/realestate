@@ -6,10 +6,13 @@ from .models import Scheam,Builder
 import datetime
 
 
-class UserSignupform(forms.ModelForm):
+class UserSignupform(UserCreationForm):
+    password1 = forms.CharField(label='Password', widget=forms.PasswordInput)
+    password2 = forms.CharField(label='Confirm Password', widget=forms.PasswordInput)
+
     class Meta:
         model = User
-        fields = '__all__'
+        fields = ('username','email','password1','password2')
 
 class BuilderForm(forms.ModelForm):
     password = forms.CharField(widget=forms.PasswordInput)

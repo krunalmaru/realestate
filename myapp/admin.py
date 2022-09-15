@@ -4,7 +4,7 @@ from .models import Builder,ImageUpload,Scheam,ContactInquiry
 # Register your models here.
 @admin.register(Builder)
 class BuilderAdmin(admin.ModelAdmin):
-    list_display = ['id','name','email','mobile','agencyname']
+    list_display = ['id','name','email','mobile','agencyname','profileimg']
 
 
 @admin.register(ImageUpload)
