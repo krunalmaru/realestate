@@ -5,42 +5,48 @@ from .models import ContactInquiry,Builder,Scheam
 from django.contrib.auth.models import User
 from django.contrib import auth
 from django.contrib import messages
-from .forms import BuilderForm, AddscheamForm
+from .forms import BuilderForm, AddscheamForm,UserSignupform
 from  django.views import View
 from django.core.paginator import Paginator
 # makeCreate your views here.
 
 
 def home(request):
-    if 'search-field' in request.GET:
-        obj=request.GET['search-field']
-        obj=Scheam.objects.filter(scheamname_icontains=obj).order_by('-id')
-    else:    
-        obj = Scheam.objects.filter(is_feature = True).order_by('id')
-    context = {'obj':obj }       
+    ourbui = Builder.objects.all()   
+    obj = Scheam.objects.filter(is_feature = True).order_by('id')
+    ab = Scheam.objects.values_list('propertytype', flat=True).order_by('propertytype').distinct()
+    
+    context = {'obj':obj ,'ourbui':ourbui, 'ab':ab}       
     return render(request ,'myapp/home.html', context)
 
 def signup(request):
     if request.method == 'POST':
-        username = request.POST.get('username')
-        email = request.POST.get('email')
-        password = request.POST.get('password')
-        confirmpass = request.POST.get('confirmpass')
+        form = UserSignupform(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request,'your account created successfully')
+            form = UserSignupform()
+            return redirect('login')
 
-        if password == confirmpass:
-            if User.objects.filter(username=username).exists():
-                messages.error(request, 'User Already exist')               
-                return redirect('signup')
-            else:
-                myuser = User.objects.create_user(username=username, email=email, password=password)   
-                myuser.set_password(password)     
-                myuser.save()
-                messages.success(request,'your account created successfully')
-                return redirect('login')
+        # username = request.POST.get('username')
+        # email = request.POST.get('email')
+        # password = request.POST.get('password')
+        # confirmpass = request.POST.get('confirmpass')
+
+        # if password == confirmpass:
+        #     if User.objects.filter(username=username).exists():
+        #         messages.error(request, 'User Already exist')               
+        #         return redirect('signup')
+        #     else:
+        #         myuser = User.objects.create_user(username=username, email=email, password=password)   
+        #         myuser.set_password(password)     
+        #         myuser.save()
+        #         messages.success(request,'your account created successfully')
     else:
-        print('this is Post')
+        form = UserSignupform()
+        print('this is get')
 
-    return render(request, 'myapp/signup.html')
+    return render(request, 'myapp/signup.html',{'form':form})
 
 def buidersignup(request):
     if request.method == 'POST':
@@ -48,10 +54,10 @@ def buidersignup(request):
         if fm.is_valid():
             fm.save()
             messages.success(request,'your account created successfully')
-            return HttpResponseRedirect('/builderlogin')
+            return HttpResponseRedirect('/')
     else:
         fm = BuilderForm()    
-    return render(request,'myapp/buildersignup.html',{'form':fm})
+    return render(request,'myapp/buildersignup.html',{'fm':fm})
 
 def userlogin(request):
     if request.method == 'POST':
@@ -72,6 +78,7 @@ def userlogin(request):
 
 
 def buiderlogin(request):
+
     return render(request, 'myapp/login.html')
 
 
@@ -83,23 +90,24 @@ def logout(request):
 def builderlist(request):
     obj = Scheam.objects.filter(is_feature = True).order_by('-id')
     builder = Builder.objects.all().order_by('id')
-    paginator = Paginator(builder, 1)
+    paginator = Paginator(builder, 2)
     page_number = request.GET.get('page')
-    bui = paginator.get_page(page_number)
-    context = {'builder':bui,'obj':obj}
+    builder = paginator.get_page(page_number)
+    context = {'builder':builder,'obj':obj}
     return render(request, 'myapp/builderlist.html',context)
 
 
 def builderdetail(request,id):
     bui = Builder.objects.get(id=id)
-    print(bui)
+    new = Scheam.objects.filter(is_feature = True).order_by('id')
+
     sc = Scheam.objects.filter(name=bui).filter(propertytype='Residential')
     com = Scheam.objects.filter(name=bui).filter(propertytype='Commercial')
     off = Scheam.objects.filter(name=bui).filter(propertytype='Office')
     ind = Scheam.objects.filter(name=bui).filter(propertytype='Industrial')
     app = Scheam.objects.filter(name=bui).filter(propertytype='Appartment')
 
-    context = {'bui':bui,'sc':sc,'com':com,'off':off,'ind':ind,'app':app}
+    context = {'bui':bui,'sc':sc,'com':com,'off':off,'ind':ind,'app':app,'new':new}
     return render (request, 'myapp/builderdetail.html',context)
 
 
@@ -136,23 +144,20 @@ def propertylist(request):
 def addscheam(request):
     if request.method == 'POST':
         form = AddscheamForm(request.POST, request.FILES)
-        print(type(request.POST))
-        print(request.POST.keys())
-        print(request.POST)
+        # print(type(request.POST))
+        # print(request.POST.keys())
+        # print(request.POST)
         if form.is_valid():
             form.save() 
-            print('amenities',form.cleaned_data['amenites'])
+            # print('amenities',form.cleaned_data['amenites'])
             messages.success(request, 'Data Save successfully!!')
             form = AddscheamForm()
             return redirect('/addscheam')
            
         else:
             print('form error',form.errors)
-   
-        print('this is post ')
-        # return redirect('/')
+
     else:
         form = AddscheamForm()
-        print("this is get")
     return render(request, 'myapp/addscheam.html',{'form':form})
   
