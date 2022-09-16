@@ -2,7 +2,7 @@
 {% load static %}
 {% block main-content %}
    <!-- banner-section -->
-   <section class="banner-section" style="background-image: url(myapp/static/myapp/images/banner/banner-1.jpg);">
+   <section class="banner-section" style="background-image: url(static/myapp/images/shape/shape-7.png)">
     <div class="auto-container">
         <div class="inner-container">
             <div class="content-box centred">
@@ -21,7 +21,7 @@
                         <div class="tab active-tab" id="tab-1">
                             <div class="inner-box">
                                 <div class="top-search">
-                                    <form action="{% url 'home' %}" method="post" class="search-form">
+                                    <form action="{% url 'search' %}" method="get" class="search-form">
                                         {% csrf_token %}
                                         <div class="row clearfix">
                                             <div class="col-lg-4 col-md-12 col-sm-12 column">
@@ -364,8 +364,6 @@
 </section>
 <!-- banner-section end -->
 
-
-
         <!-- category-section -->
         <section class="category-section centred">
             <div class="auto-container">
@@ -390,17 +388,19 @@
         </section>
         <!-- category-section end -->
 <!-- feature-section -->
-<section class="feature-section sec-pad bg-color-1">
+<section class="feature-section sec-pad bg-color-1" >
     <div class="auto-container">
+
         <div class="sec-title centred">
             <h5>Features</h5>
             <h2>Featured Property</h2>
             <p>Most Rated Builder Scheam <br />labore dolore magna aliqua enim.</p>
         </div>
         
-        <div class="three-item-carousel owl-carousel owl-theme owl-dots-none nav-style-one">            
+        <div class="three-item-carousel owl-carousel owl-theme owl-dots-none nav-style-one">      
+
             <!-- deals-carousel owl-carousel owl-theme owl-dots-none nav-style-one -->
-        {% for ob in obj %}
+            {% for ob in obj %}
             <div class="row clearfix">
                 <div class="col-sm-12 feature-block">                
                     <div class="feature-block-one wow fadeInUp animated" data-wow-delay="00ms" data-wow-duration="1500ms">
@@ -446,10 +446,11 @@
                 
                 </div>
             </div>
-        {% endfor %}
+            {% endfor %}
             
         </div>
         <div class="more-btn centred"><a href="{% url 'propertylist' %}" class="theme-btn btn-one">View All Listing</a></div>
+        
     </div>
 </section>
 <!-- feature-section end -->
@@ -529,7 +530,7 @@
 {% block testimonial %}
   <!-- testimonial-section end -->
   <section class="testimonial-section bg-color-1 centred">
-    <div class="pattern-layer" style="background-image: url(assets/images/shape/shape-1.png);"></div>
+    <div class="pattern-layer"><img src="{% static 'myapp/images/shape/shape-1.png' %}" alt=""> </div>
     <div class="auto-container">
         <div class="sec-title">
             <h5>Testimonials</h5>
@@ -578,6 +579,8 @@
 <!-- testimonial-section end -->
 
 {% endblock %}
+
+
 
 {% block chooseus %}
        <!-- chooseus-section -->
@@ -628,13 +631,13 @@
         </div>
     </section>
     <!-- chooseus-section end -->
-
-
 {% endblock %}
+
+
 
 {% block page %}
  <!-- place-section -->
- <section class="place-section sec-pad">
+ <!-- <section class="place-section sec-pad">
     <div class="auto-container">
         <div class="sec-title centred">
             <h5>Top Places</h5>
@@ -690,10 +693,13 @@
             </div>
         </div>
     </div>
-</section>
+</section> -->
 <!-- place-section end -->
-
 {% endblock %}
+
+
+
+
 {% block agent %}
   <!-- team-section -->
   <section class="team-section sec-pad centred bg-color-1">

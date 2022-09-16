@@ -100,7 +100,6 @@ def builderlist(request):
 def builderdetail(request,id):
     bui = Builder.objects.get(id=id)
     new = Scheam.objects.filter(is_feature = True).order_by('id')
-
     sc = Scheam.objects.filter(name=bui).filter(propertytype='Residential')
     com = Scheam.objects.filter(name=bui).filter(propertytype='Commercial')
     off = Scheam.objects.filter(name=bui).filter(propertytype='Office')
@@ -149,7 +148,6 @@ def addscheam(request):
         # print(request.POST)
         if form.is_valid():
             form.save() 
-            # print('amenities',form.cleaned_data['amenites'])
             messages.success(request, 'Data Save successfully!!')
             form = AddscheamForm()
             return redirect('/addscheam')
@@ -161,3 +159,11 @@ def addscheam(request):
         form = AddscheamForm()
     return render(request, 'myapp/addscheam.html',{'form':form})
   
+def search(request):
+    query = request.GET['search-field']
+    new = Scheam.objects.filter(scheamname__icontains = query)
+    new = Scheam.objects.filter(location__icontains = query)
+
+
+    context = {'new':new}
+    return render(request,'myapp/search.html', context)
