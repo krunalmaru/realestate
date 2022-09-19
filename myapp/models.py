@@ -2,10 +2,15 @@ from django.db import models
 from django.contrib.auth.models import User, AbstractUser
 from django import forms
 import datetime
+# from django_resized import ResizedImageField
+from imagekit.models import ImageSpecField
+from imagekit.processors import ResizeToFill
+# from sorl.thumbnail import ImageField, get_thumbnail
 # Create your models here.
 
 class Builder(models.Model):
     profileimg = models.ImageField(upload_to='image/profile')
+    profileimg_thumbnail = ImageSpecField(source='profileimg',processors=[ResizeToFill(50,50)],format='JPEG',options={'quality':60})
     name = models.CharField(max_length=100)
     email = models.EmailField(default='') 
     mobile = models.CharField(max_length=15)
@@ -16,7 +21,12 @@ class Builder(models.Model):
     
     def __str__(self):
         return self.name
-  
+    
+    # def save(self, *args, **kwargs): 
+    #     if self.profileimg:
+    #         self.profileimg = get_thumbnail(self.profileimg, '500x600', quality=99, format='JPEG')
+    #     super(Builder, self).save(*args, **kwargs)
+
 
 class Scheam(models.Model):
     CHOICE = (
@@ -29,6 +39,7 @@ class Scheam(models.Model):
     )
 
     image = models.ImageField(upload_to='image')
+    
     name = models.ForeignKey(Builder, on_delete=models.CASCADE)
     scheamname =models.CharField(max_length=100)
     location = models.CharField(max_length=200,default='')
