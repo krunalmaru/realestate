@@ -125,7 +125,6 @@ def contactus(request):
 class PropertyDetailView(View):
     def get(self, request,id ):
         pr = Scheam.objects.get(id=id)
-        print(pr)
         aj = Scheam.objects.all()       
         context = {'pr':pr,'aj':aj}
         return render(request,'myapp/propertydetail.html',context)

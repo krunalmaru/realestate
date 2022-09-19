@@ -11,7 +11,7 @@
                
                 <div class="author-info clearfix">
                     <div class="author-box pull-left">
-                        <figure class="author-thumb"><img src="{{pr.name.profileimg.url}}" alt=""></figure>
+                        <figure class="author-thumb"><img src="{{pr.name.profileimg_thumbnail.url}}" alt=""></figure>
                         <h6>{{pr.name}}</h6>
                     </div>
                     <ul class="rating clearfix pull-left">
@@ -86,8 +86,8 @@
                             <h4>Amenities</h4>
                         </div>
                         <ul class="list clearfix">
-     
-                                {{pr.amenites}}
+                            
+                              <b>  {{pr.amenites}}</b>
                     
                         </ul>
                     </div>
@@ -145,12 +145,12 @@
                             <h4>Location</h4>
                         </div>
                         <ul class="info clearfix">
-                            <li><span>Address:</span> Virginia temple hills</li>
+                            <li><span>Address:</span> {{pr.address}}</li>
                             <li><span>Country:</span> United State</li>
                             <li><span>State/county:</span> California</li>
                             <li><span>Neighborhood:</span> Andersonville</li>
-                            <li><span>Zip/Postal Code:</span> 2403</li>
-                            <li><span>City:</span> Brooklyn</li>
+                            <li><span>Zip/Postal Code:</span>{{pr.zipcode}}</li>
+                            <li><span>City:</span> {{pr.location}}</li>
                         </ul>
                         <div class="google-map-area">
                             <div 
@@ -164,7 +164,7 @@
                                 data-markers='{
                                     "marker-1": [40.712776, -74.005974, "<h4>Branch Office</h4><p>77/99 New York</p>","assets/images/icons/map-marker.png"]
                                 }'>
-
+                                
                             </div>
                         </div>
                     </div>
@@ -351,7 +351,7 @@
                 <div class="property-sidebar default-sidebar">
                     <div class="author-widget sidebar-widget">
                         <div class="author-box">
-                            <figure class="author-thumb"><img src="{{pr.name.profileimg.url}}" alt="" height="20" width="20"></figure>
+                            <figure class="author-thumb"><img src="{{pr.name.profileimg_thumbnail.url}}" alt="" height="20" width="20"></figure>
                             <div class="inner">
                                 <h4>{{pr.name}}</h4>
 
@@ -442,7 +442,7 @@
                             <div class="lower-content my-4">
                                 <div class="author-info clearfix">
                                     <div class="author pull-left">
-                                        <figure class="author-thumb"><img src="{{i.name.profileimg.url}}" alt=""></figure>
+                                        <figure class="author-thumb"><img src="{{i.name.profileimg_thumbnail.url}}" alt=""></figure>
                                         <h6>{{i.name}}</h6>
                                     </div>
                                     <div class="buy-btn pull-right"><a href="property-details.html">For Buy</a></div>
