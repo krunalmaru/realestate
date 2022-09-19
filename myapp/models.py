@@ -10,7 +10,8 @@ from imagekit.processors import ResizeToFill
 
 class Builder(models.Model):
     profileimg = models.ImageField(upload_to='image/profile')
-    profileimg_thumbnail = ImageSpecField(source='profileimg',processors=[ResizeToFill(50,50)],format='JPEG',options={'quality':60})
+    profileimg_thumbnail = ImageSpecField(source='profileimg',processors=[ResizeToFill(50,50)],format='JPEG',options={'quality':80})
+    profileimg_size = ImageSpecField(source='profileimg',processors=[ResizeToFill(200,200)],format='JPEG',options={'quality':80})
     name = models.CharField(max_length=100)
     email = models.EmailField(default='') 
     mobile = models.CharField(max_length=15)
@@ -39,7 +40,7 @@ class Scheam(models.Model):
     )
 
     image = models.ImageField(upload_to='image')
-    
+
     name = models.ForeignKey(Builder, on_delete=models.CASCADE)
     scheamname =models.CharField(max_length=100)
     location = models.CharField(max_length=200,default='')

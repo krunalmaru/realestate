@@ -458,7 +458,7 @@
 
 {% block video %}
      <!-- video-section -->
-     <section class="video-section centred" style="background-image: url(assets/images/background/video-1.jpg);">
+     <!-- <section class="video-section centred" style="background-image: url(assets/images/background/video-1.jpg);">
         <div class="auto-container">
             <div class="video-inner">
                 <div class="video-btn">
@@ -466,7 +466,7 @@
                 </div>
             </div>
         </div>
-    </section>
+    </section> -->
     <!-- video-section end -->
 
 {% endblock %}
@@ -504,7 +504,7 @@
                                         <ul class="more-details clearfix">
                                             <li><i class="icon-14"></i>{{op.rooms}}</li>
                                             <li><i class="icon-15"></i>{{op.bathroom}}</li>
-                                            <li><i class="icon-16"></i>{{ob.size}}Sq Ft.</li>
+                                            <li><i class="icon-16"></i>{{op.size}}Sq Ft.</li>
                                         </ul>
                                         <div class="btn-box"><a href="{% url 'propertydetail' op.id%}" class="theme-btn btn-one">See Details</a></div>
                                     </div>
@@ -714,7 +714,7 @@
             {% for i in ourbui %}
             <div class="team-block-one">
                 <div class="inner-box">
-                    <figure class="image-box"><img src="{{i.profileimg.url}}" alt=""></figure>
+                    <figure class="image-box"><img src="{{i.profileimg_size.url}}" alt=""></figure>
                     <div class="lower-content">
                         <div class="inner">
                             <h4><a href="{% url 'builderdetail' i.id %}">{{i.name}}</a></h4>

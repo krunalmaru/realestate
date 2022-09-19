@@ -120,7 +120,7 @@
                                     {% for i in builder%}
                                     <div class="agents-block-one">
                                         <div class="inner-box">
-                                            <figure class="image-box"><img src="{{i.profileimg.url}}" alt=""></figure>
+                                            <figure class="image-box"><img src="{{i.profileimg_size.url}}" alt=""></figure>
                                             <div class="content-box">
                                                 <div class="upper clearfix">
                                                     <div class="title-inner pull-left">
@@ -182,7 +182,7 @@
 
         <!-- subscribe-section -->
         <section class="subscribe-section bg-color-3">
-            <div class="pattern-layer"> <img src="{% static 'myapp/images/shape/shape-2.png' %}"></div>
+            <div class="pattern-layer" style="background-image: url(static/myapp/images/shape/shape-2.png);"></div>
             <div class="auto-container">
                 <div class="row clearfix">
                     <div class="col-lg-6 col-md-6 col-sm-12 text-column">
