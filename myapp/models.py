@@ -1,5 +1,6 @@
 from django.db import models
-from django.contrib.auth.models import User, AbstractUser
+from multiselectfield import MultiSelectField
+from django.utils import timezone
 from django import forms
 import datetime
 # from django_resized import ResizedImageField
@@ -8,8 +9,10 @@ from imagekit.processors import ResizeToFill
 # from sorl.thumbnail import ImageField, get_thumbnail
 # Create your models here.
 
+#
+
 class Builder(models.Model):
-    profileimg = models.ImageField(upload_to='image/profile')
+    profileimg = models.ImageField(upload_to='image/profile',blank = True, null = True)
     profileimg_thumbnail = ImageSpecField(source='profileimg',processors=[ResizeToFill(50,50)],format='JPEG',options={'quality':80})
     profileimg_size = ImageSpecField(source='profileimg',processors=[ResizeToFill(200,200)],format='JPEG',options={'quality':80})
     name = models.CharField(max_length=100)
@@ -22,6 +25,9 @@ class Builder(models.Model):
     
     def __str__(self):
         return self.name
+
+    # def __init__(self, *args, **kwargs):
+    #     self.name = self.name.capitalize()
     
     # def save(self, *args, **kwargs): 
     #     if self.profileimg:
@@ -40,7 +46,7 @@ class Scheam(models.Model):
     )
 
     image = models.ImageField(upload_to='image')
-
+    
     name = models.ForeignKey(Builder, on_delete=models.CASCADE)
     scheamname =models.CharField(max_length=100)
     location = models.CharField(max_length=200,default='')
@@ -79,4 +85,7 @@ class ContactInquiry(models.Model):
     email = models.EmailField()
     phone = models.CharField(max_length=15)
     message = models.TextField()
+
+    def __str__(self):
+        return self.name
 

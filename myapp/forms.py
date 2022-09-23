@@ -20,7 +20,7 @@ class BuilderForm(forms.ModelForm):
     class Meta:
         model = Builder
         fields = ( 'name','email', 'mobile','agencyname','address','city','zipcode','password','confirmpass')
-
+    
 
 CHOICES = [
         ('AirConditioning','AirConditioning'),
@@ -38,6 +38,7 @@ CHOICES = [
 
 class AddscheamForm(forms.ModelForm):
     amenites = forms.MultipleChoiceField(label="Amenities",choices=CHOICES, widget=forms.CheckboxSelectMultiple)
+    builtyear = forms.DateField(initial=datetime.date.today)
     class Meta:
         model = Scheam
         fields = ('image','name','scheamname','location','price','propertytype','size','amenites','storeroom','bedrooms','bathroom','builtyear','propertystatus','description','is_feature')

@@ -7,7 +7,7 @@
         <div class="top-details clearfix">
             
             <div class="left-column pull-left clearfix">
-                <h3>{{pr.scheamname}}</h3>
+                <h3>{{pr.scheamname|title}}</h3>
                
                 <div class="author-info clearfix">
                     <div class="author-box pull-left">
@@ -366,9 +366,10 @@
                             </div>
                         </div>
                         <div class="form-inner">
-                            <form action="property-details.html" method="post" class="default-form">
+                            <form action="{% url 'contact' %}" method="post" class="default-form">
+                                {% csrf_token %}
                                 <div class="form-group">
-                                    <input type="text" name="name" placeholder="Your name" required="">
+                                    <input type="text" name="username" placeholder="Your name" required="">
                                 </div>
                                 <div class="form-group">
                                     <input type="email" name="email" placeholder="Your Email" required="">
@@ -445,9 +446,9 @@
                                         <figure class="author-thumb"><img src="{{i.name.profileimg_thumbnail.url}}" alt=""></figure>
                                         <h6>{{i.name}}</h6>
                                     </div>
-                                    <div class="buy-btn pull-right"><a href="property-details.html">For Buy</a></div>
+                                    <div class="buy-btn pull-right"><a href="{% url 'propertydetail' i.id%}">For Buy</a></div>
                                 </div>
-                                <div class="title-text"><h4><a href="property-details.html">{{i.scheamname}}</a></h4></div>
+                                <div class="title-text"><h4><a href="{% url 'propertydetail' i.id%}">{{i.scheamname|title}}</a></h4></div>
                                 <div class="price-box clearfix">
                                     <div class="price-info pull-left">
                                         <h6>Start From</h6>

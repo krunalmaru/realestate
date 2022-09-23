@@ -14,7 +14,7 @@
                     <div class="tab-btn-box">
                         <ul class="tab-btns tab-buttons centred clearfix">
                             <li class="tab-btn active-btn" data-tab="#tab-1">BUY</li>
-                            <li class="tab-btn" data-tab="#tab-2">RENT</li>
+                            <!-- <li class="tab-btn" data-tab="#tab-2">RENT</li> -->
                         </ul>
                     </div>
                     <div class="tabs-content info-group">
@@ -29,42 +29,12 @@
                                                     <label>Search Property</label>
                                                     <div class="field-input">
                                                         <i class="fas fa-search"></i>
-                                                        <input type="search" name="search-field" placeholder="Search by Property, Location or Landmark..." required="">
+                                                        <input type="search" name="search" placeholder="Search by Property, Location or Landmark..." required="">
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="col-lg-4 col-md-6 col-sm-12 column">
-                                                <div class="form-group">
-                                                    <label>Location</label>
-                                                    
-                                                        <div class="select-box">
-                                                        
-                                                        <i class="far fa-compass"></i> 
-                                                            <select class="nice-select wide open">                                                            -->
-                                                                 <option data-display="Input location">Input location</option>
-                                                                <option value="1">New York</option>
-                                                                <option value="2">California</option>
-                                                                <option value="3">London</option>
-                                                                <option value="4">Maxico</option>
-                                                            </select>
-                                                        </div>
-                                                   
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-4 col-md-6 col-sm-12 column">
-                                                <div class="form-group">
-                                                    <label>Property Type</label>
-                                                    <div class="select-box">
-                                                        <select class="nice-select wide open">
-                                                           <option data-display="All Type">All Type</option>
-                                                           <option value="1">Laxury</option>
-                                                           <option value="2">Classic</option>
-                                                           <option value="3">Modern</option>
-                                                           <option value="4">New</option>
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                            </div>
+                                         
+                                            
                                         </div>
                                         <div class="search-btn">
                                             <button type="submit"><i class="fas fa-search"></i>Search</button>
@@ -395,7 +365,7 @@
             <!-- deals-carousel owl-carousel owl-theme owl-dots-none nav-style-one -->
             {% for ob in new %} 
           
-            {{ob.id}} 
+             
            
             <div class="row clearfix">
                 <div class="col-sm-12 feature-block">                
@@ -410,7 +380,7 @@
                         <div class="lower-content">
                             <div class="author-info clearfix">
                                 <div class="author pull-left">
-                                    <figure class="author-thumb"><img src="{{ob.name.profileimg.url}}" alt=""></figure>
+                                    <figure class="author-thumb"><img src="{{ob.name.profileimg_thumbnail.url}}" alt=""></figure>
                                     <h6>{{ob.name}}</h6>
                                 </div>
                                 <div class="buy-btn pull-right"><a href="{% url 'propertydetail' ob.id %}">For Buy</a></div>
@@ -453,24 +423,9 @@
 <!-- feature-section end -->
 {% endblock%}
 
-{% block video %}
-     <!-- video-section -->
-     <section class="video-section centred" style="background-image: url(assets/images/background/video-1.jpg);">
-        <div class="auto-container">
-            <div class="video-inner">
-                <div class="video-btn">
-                    <a href="https://www.youtube.com/watch?v=nfP5N9Yc72A&amp;t=28s" class="lightbox-image" data-caption=""><i class="icon-17"></i></a>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- video-section end -->
-
-{% endblock %}
-
 {% block deal %}
       <!-- deals-section -->
-      <section class="deals-section sec-pad">
+      <!-- <section class="deals-section sec-pad">
         <div class="auto-container">
             <div class="sec-title">
                 <h5>Hot Property</h5>
@@ -520,7 +475,7 @@
             
             </div>
         </div>
-    </section>
+    </section> -->
     <!-- deals-section end -->
 {% endblock %}
 

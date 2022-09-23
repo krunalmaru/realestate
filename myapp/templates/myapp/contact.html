@@ -1,7 +1,7 @@
 {% extends 'myapp/base.html' %}
 {% load static %}
 {% block main-content %}
-
+<section class="contact-info-section sec-pad centred">
     <div class="auto-container">
         <div class="sec-title">
             <h5>Contact us</h5>
@@ -94,11 +94,12 @@
         </div>
     </div>
 </section>
+
 <!-- contact-section end -->
 
     <!-- subscribe-section -->
     <section class="subscribe-section bg-color-3">
-        <div class="pattern-layer" style="background-image: url(assets/images/shape/shape-2.png);"></div>
+        <div class="pattern-layer" style="background-image: url(/static/myapp/images/shape/shape-2.png);"></div>
         <div class="auto-container">
             <div class="row clearfix">
                 <div class="col-lg-6 col-md-6 col-sm-12 text-column">
@@ -122,4 +123,5 @@
     </section>
     <!-- subscribe-section end -->
 
-{% endblock %}
+{% endblock %} 
+

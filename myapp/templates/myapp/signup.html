@@ -18,13 +18,21 @@
                             <div class="inner-box">
                                 
                                 <h4>Sign up</h4> 
-                                    <form action="{% url 'signup' %}" method="POST" novalidate class="default-form">
+                                    
+                                    <form action="{% url 'signup' %}" method="POST"  class="default-form">
                                         {% csrf_token %}
-                                        
-    
+                                        {% if form.errors %}
+                                         {% for field in form %}
+                                            {% for error in field.errors %}
+                                            <div class="alert alert-danger">
+                                                <strong>{{ error|escape }}</strong>
+                                            </div>
+                                            {% endfor %}
+                                          {% endfor %}
+                                        {% endif %}                                    
                                         <div class="form-group">
                                             {{form.username.label_tag}}
-                                            {{form.username}}
+                                            {{form.username | capfirst}}
                                             
                                         </div>
                                         <div class="form-group">

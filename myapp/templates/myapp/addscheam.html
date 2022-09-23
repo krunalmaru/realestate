@@ -37,8 +37,8 @@
                             <div class="row clearfix">
                                 <div class="col-lg-4 col-md-6 col-sm-12 column">
                                     <div class="field-input">
-                                        {{form.name.label_tag}}
-                                        {{form.name}}
+                                        {{form.name.label_tag|capfirst}}
+                                        {{form.name|capfirst}}
                                     </div>
                                 </div>
                                 <div class="col-lg-4 col-md-6 col-sm-12 column">
@@ -106,14 +106,14 @@
                                             {{form.description}}
                                     </div>
                                 </div>
-                                <div class="col-lg-4 col-md-6 col-sm-12 column">
+                                <!-- <div class="col-lg-4 col-md-6 col-sm-12 column">
                                     <div class="field-input">                                    
                                         <div class="select-box">
                                             {{form.is_feature.label_tag}}
                                             {{form.is_feature}}
                                         </div>
                                     </div>
-                                </div>
+                                </div> -->
                             </div>
                         </div>
                     </div>
@@ -162,7 +162,7 @@
                             </div>
                         </div>
                         <ul class="other-option clearfix">
-                            <li>{{form.amenites.label_tag}}</li>
+                            <li><B>{{form.amenites.label_tag}}</B></li>
                             {% for i in form.amenites %}
                                <li> {{i}}</li>
                             {% endfor %}                            

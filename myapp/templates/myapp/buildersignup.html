@@ -4,7 +4,7 @@
 <section class="ragister-section centred sec-pad">
     <div class="auto-container">
         <div class="row clearfix">
-            <div class="col-xl-6 col-lg-4 col-md-4 offset-xl-2 big-column">
+            <div class="col-xl-8 col-lg-4 col-md-4 offset-xl-2 big-column">
                 <div class="sec-title">
                     <h5>Sign up</h5>
                     <h2>Sign In With Realshed</h2>
@@ -13,58 +13,67 @@
                     <div class="tab-btn-box">
                         <ul class="tab-btns tab-buttons centred clearfix">
 
-                            <li class="tab-btn active-btn" data-tab="#tab-1" href="{% url 'buidersignup' %}">Builder</li>
-                            <li class="tab-btn" data-tab="#tab-2" href="#">User</li>
+                            <li class="tab-btn active-btn" data-tab="#tab-1" >Builder</li>
+                           
                         </ul>
                     </div>
                     <div class="tabs-content">
                         <div class="tab active-tab" id="tab-1">
                             <div class="inner-box">
-                                <h4>Sign up</h4>                              
-                                <form action="{% url 'buidersignup' %}" method="POST" class="default-form">
+                                <h4>Sign up</h4>    
+                                {% if form.non_field_errors %}
+                                {% for errors in form.non_field_errors  %}
+                                    <p class="alert alert-danger my-3">{{errors}}</p>
+                                {% endfor %}
+                                {% endif %} 
+                  
+                                <form action="{% url 'buildersignup' %}" method="POST" class="default-form">
                                     {% csrf_token %}
+                                    {% if form.errors %}
+                                        {% for field in form %}
+                                            {% for error in field.errors %}
+                                            <div class="alert alert-danger">
+                                                <strong>{{ error|escape }}</strong>
+                                            </div>
+                                            {% endfor %}
+                                        {% endfor %}
+                                    {% endif %} 
+                                   
                                     <div class="form-group">
-                                    {% for message in messages %}
-                                        <div class="alert alert-danger" role="alert">
-                                            {{message}}
-                                        </div>
-                                    {% endfor %}
+                                        {{fm.name.label_tag}}
+                                        {{fm.name|capfirst}}
                                     </div>
                                     <div class="form-group">
-                                        {{form.name.label_tag}}
-                                        {{form.name}}
+                                        {{fm.email.label_tag}}
+                                        {{fm.email}}
                                     </div>
                                     <div class="form-group">
-                                        {{form.email.label_tag}}
-                                        {{form.email}}
+                                        {{fm.mobile.label_tag}}
+                                        {{fm.mobile}}
                                     </div>
                                     <div class="form-group">
-                                        {{form.mobile.label_tag}}
-                                        {{form.mobile}}
+                                        {{fm.agencyname.label_tag}}
+                                        {{fm.agencyname}}
                                     </div>
                                     <div class="form-group">
-                                        {{form.agencyname.label_tag}}
-                                        {{form.agencyname}}
+                                        {{fm.address.label_tag}}
+                                        {{fm.address}}
                                     </div>
                                     <div class="form-group">
-                                        {{form.address.label_tag}}
-                                        {{form.address}}
+                                        {{fm.city.label_tag}}
+                                        {{fm.city}}
                                     </div>
                                     <div class="form-group">
-                                        {{form.city.label_tag}}
-                                        {{form.city}}
+                                        {{fm.zipcode.label_tag}}
+                                        {{fm.zipcode}}
                                     </div>
                                     <div class="form-group">
-                                        {{form.zipcode.label_tag}}
-                                        {{form.zipcode}}
+                                        {{fm.password.label_tag}}
+                                        {{fm.password}}
                                     </div>
                                     <div class="form-group">
-                                        {{form.password.label_tag}}
-                                        {{form.password}}
-                                    </div>
-                                    <div class="form-group">
-                                        {{form.confirmpass.label_tag}}
-                                        {{form.confirmpass}}
+                                        {{fm.confirmpass.label_tag}}
+                                        {{fm.confirmpass}}
                                     </div>
                                     <div class="form-group message-btn">
                                         <button type="submit" class="theme-btn btn-one">Sign up</button>

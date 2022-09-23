@@ -6,7 +6,8 @@ from django.contrib.auth.models import User
 from django.contrib import auth
 from django.contrib import messages
 from .forms import BuilderForm, AddscheamForm,UserSignupform
-from  django.views import View
+from  django.views import View 
+from django.db.models import Q
 from django.core.paginator import Paginator
 # makeCreate your views here.
 
@@ -15,8 +16,8 @@ def home(request):
     ourbui = Builder.objects.all()   
     obj = Scheam.objects.filter(is_feature = True).order_by('id')
     ab = Scheam.objects.values_list('propertytype', flat=True).order_by('propertytype').distinct()
-    
-    context = {'obj':obj ,'ourbui':ourbui, 'ab':ab}       
+    lo = Scheam.objects.values_list('location', flat=True).order_by('location').distinct()
+    context = {'obj':obj ,'ourbui':ourbui, 'ab':ab, 'lo':lo}       
     return render(request ,'myapp/home.html', context)
 
 def signup(request):
@@ -44,7 +45,6 @@ def signup(request):
         #         messages.success(request,'your account created successfully')
     else:
         form = UserSignupform()
-        print('this is get')
 
     return render(request, 'myapp/signup.html',{'form':form})
 
@@ -132,10 +132,13 @@ class PropertyDetailView(View):
 
 def propertylist(request):
     scheam = Scheam.objects.all().order_by('id')
+    di = Scheam.objects.values_list('propertytype', flat=True).order_by('propertytype').distinct()
+    loc = Scheam.objects.values_list('location', flat=True).order_by('location').distinct()
+    # loc = Scheam.objects.all()
     paginator = Paginator(scheam, 3, orphans=1)
     page_number = request.GET.get('page',1)
     page_obj = paginator.get_page(page_number)    
-    context = {'page_obj':page_obj}
+    context = {'page_obj':page_obj,'di':di,'loc':loc}
 
     return render(request,'myapp/propertylist.html',context)
 
@@ -159,10 +162,10 @@ def addscheam(request):
     return render(request, 'myapp/addscheam.html',{'form':form})
   
 def search(request):
-    query = request.GET['search-field']
-    new = Scheam.objects.filter(scheamname__icontains = query)
-    new = Scheam.objects.filter(location__icontains = query)
-
-
+    query = request.GET['search']
+    new = Scheam.objects.all()
+    if query is not None:
+        look = Q(propertytype__icontains = query)
+        new = Scheam.objects.filter(look).distinct()
     context = {'new':new}
     return render(request,'myapp/search.html', context)

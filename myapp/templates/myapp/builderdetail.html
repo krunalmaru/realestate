@@ -22,12 +22,12 @@
             <div class="agent-details-content">
                 <div class="agents-block-one">
                     <div class="inner-box mr-0">
-                        <figure class="image-box"><img src="{{bui.profileimg_thumbnail.url}}" height="50px" width="50px" alt=""></figure>
+                        <figure class="image-box"><img src="{{bui.profileimg_size.url}}" height="50px" width="50px" alt=""></figure>
                         <div class="content-box">
                             <div class="upper clearfix">
                                 <div class="title-inner pull-left">
-                                    <h4>{{bui.name}}</h4>
-                                    <span class="designation">{{bui.agencyname}}</span>
+                                    <h4>{{bui.name|title}}</h4>
+                                    <span class="designation">{{bui.agencyname|title}}</span>
                                 </div>
                                 <ul class="social-list pull-right clearfix">
                                     <li><a href="agents-details.html"><i class="fab fa-facebook-f"></i></a></li>
@@ -102,10 +102,10 @@
                                                     <figure class="image"><img src="{{i.image.url}}" alt=""></figure>
                                                     <div class="batch"><i class="icon-11"></i></div>
                                                     <span class="category">Featured</span>
-                                                    <div class="buy-btn"><a href="property-details.html">For Buy</a></div>
+                                                    <div class="buy-btn"><a href="">For Buy</a></div>
                                                 </div>
                                                 <div class="lower-content">
-                                                    <div class="title-text"><h4><a href="property-details.html">{{i.scheamname}}</a></h4></div>
+                                                    <div class="title-text"><h4><a href="">{{i.scheamname|title}}</a></h4></div>
                                                     <div class="price-box clearfix">
                                                         <div class="price-info pull-left">
                                                             <h6>Start From</h6>
@@ -152,7 +152,7 @@
                                                     <div class="buy-btn"><a href="property-details.html">For Buy</a></div>
                                                 </div>
                                                 <div class="lower-content">
-                                                    <div class="title-text"><h4><a href="property-details.html">{{i.scheamname}}</a></h4></div>
+                                                    <div class="title-text"><h4><a href="property-details.html">{{i.scheamname|title}}</a></h4></div>
                                                     <div class="price-box clearfix">
                                                         <div class="price-info pull-left">
                                                             <h6>Start From</h6>
@@ -199,7 +199,7 @@
                                                     <div class="buy-btn"><a href="property-details.html">For Buy</a></div>
                                                 </div>
                                                 <div class="lower-content">
-                                                    <div class="title-text"><h4><a href="property-details.html">{{i.scheamname}}</a></h4></div>
+                                                    <div class="title-text"><h4><a href="property-details.html">{{i.scheamname|title}}</a></h4></div>
                                                     <div class="price-box clearfix">
                                                         <div class="price-info pull-left">
                                                             <h6>Start From</h6>
@@ -247,7 +247,7 @@
                                                     <div class="buy-btn"><a href="property-details.html">For Buy</a></div>
                                                 </div>
                                                 <div class="lower-content">
-                                                    <div class="title-text"><h4><a href="property-details.html">{{i.scheamname}}</a></h4></div>
+                                                    <div class="title-text"><h4><a href="property-details.html">{{i.scheamname|title}}</a></h4></div>
                                                     <div class="price-box clearfix">
                                                         <div class="price-info pull-left">
                                                             <h6>Start From</h6>
@@ -334,7 +334,7 @@
                                             <span class="category">Featured</span>
                                         </div>
                                         <div class="lower-content">
-                                            <div class="title-text"><h4><a href="property-details.html">{{i.scheamname}}</a></h4></div>
+                                            <div class="title-text"><h4><a href="property-details.html">{{i.scheamname|title}}</a></h4></div>
                                             <div class="price-box clearfix">
                                                 <div class="price-info">
                                                     <h6>Start From</h6>

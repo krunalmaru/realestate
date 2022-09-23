@@ -7,7 +7,9 @@
         <!-- location-section -->
         <section class="location-section">
             <div class="map-column">
-            <div class="google-map-area">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d14685.680030026291!2d72.4740865!3d23.0450585!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xef9aa46585b6f090!2sAKSHAR%20ELYSIUM!5e0!3m2!1sen!2sin!4v1663839574437!5m2!1sen!2sin" width="1600" height="600" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+
+            <!-- <div class="google-map-area">
                 <div 
                     class="google-map" 
                     id="contact-google-map" 
@@ -16,8 +18,8 @@
                     data-map-zoom="12">
 
                 </div>
-            </div>
-            <div class="location-inner clearfix">
+            </div> -->
+            <!-- <div class="location-inner clearfix">
                 <div class="single-location-box">
                     <div class="inner">
                         <div class="marker-box">
@@ -154,7 +156,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> -->
         </div>
         </section>
         <!-- location-section end -->
@@ -175,7 +177,8 @@
                                 <div class="tab active-tab" id="tab-1">
                                     <div class="inner-box">
                                         <div class="top-search">
-                                            <form action="index.html" method="post" class="search-form">
+                                            <form action="{% url 'propertylist' %}" method="get" class="search-form">
+                                                {% csrf_token %}
                                                 <div class="row clearfix">
                                                     <div class="col-lg-4 col-md-12 col-sm-12 column">
                                                         <div class="form-group">
@@ -192,11 +195,11 @@
                                                             <div class="select-box">
                                                                 <i class="far fa-compass"></i>
                                                                 <select class="nice-select wide open">
-                                                                   <option data-display="Input location">Input location</option>
-                                                                   <option value="1">New York</option>
-                                                                   <option value="2">California</option>
-                                                                   <option value="3">London</option>
-                                                                   <option value="4">Maxico</option>
+                                                                {% for i in loc %}
+                                                                   <!-- <option data-display="Input location">Input location</option> -->
+                                                                   <option value="1">{{i}}</option>
+                                                                  
+                                                                {% endfor %}
                                                                 </select>
                                                             </div>
                                                         </div>
@@ -206,11 +209,13 @@
                                                             <label>Property Type</label>
                                                             <div class="select-box">
                                                                 <select class="nice-select wide open">
-                                                                   <option data-display="All Type">All Type</option>
-                                                                   <option value="1">Laxury</option>
-                                                                   <option value="2">Classic</option>
+                                                                    {% for i in di %}
+                                                                   <!-- <option data-display="All Type">All Type</option> -->
+                                                                   <option value="1">{{i}}</option>
+                                                                   <!-- <option value="2">Classic</option>
                                                                    <option value="3">Modern</option>
-                                                                   <option value="4">New</option>
+                                                                   <option value="4">New</option> -->
+                                                                   {% endfor %}
                                                                 </select>
                                                             </div>
                                                         </div>
@@ -548,10 +553,10 @@
                                     <figure class="image"><img src="{{i.image.url}}" alt=""></figure>
                                     <div class="batch"><i class="icon-11"></i></div>
                                     <span class="category">Featured</span>
-                                    <div class="buy-btn"><a href="property-details.html">For Buy</a></div>
+                                    <div class="buy-btn"><a href="{% url 'propertydetail' i.id%}">For Buy</a></div>
                                 </div>
                                 <div class="lower-content">
-                                    <div class="title-text"><h4><a href="property-details.html">{{i.scheamname}}</a></h4></div>
+                                    <div class="title-text"><h4><a href="{% url 'propertydetail' i.id%}">{{i.scheamname|title}}</a></h4></div>
                                     <div class="price-box clearfix">
                                         <div class="price-info pull-left">
                                             <h6>Start From</h6>
