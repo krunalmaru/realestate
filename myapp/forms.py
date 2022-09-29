@@ -2,24 +2,22 @@ from django import forms
 from django.contrib.auth.models import User
 from django.forms import ModelForm
 from django.contrib.auth.forms import UserCreationForm
-from .models import Scheam,Builder
+from .models import Scheam,Builder,Customer, Account
 import datetime
 
 
-class UserSignupform(UserCreationForm):
-    password1 = forms.CharField(label='Password', widget=forms.PasswordInput)
-    password2 = forms.CharField(label='Confirm Password', widget=forms.PasswordInput)
-
+class UserSignupform(UserCreationForm):    
     class Meta:
-        model = User
+        model = Account
         fields = ('username','email','password1','password2')
+     
 
 class BuilderForm(forms.ModelForm):
     password = forms.CharField(widget=forms.PasswordInput)
     confirmpass =forms.CharField(label = 'Confirm Password',widget=forms.PasswordInput)
     class Meta:
         model = Builder
-        fields = ( 'name','email', 'mobile','agencyname','address','city','zipcode','password','confirmpass')
+        fields = ( 'buildername','email', 'mobile','agencyname','password','confirmpass')
     
 
 CHOICES = [

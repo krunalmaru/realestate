@@ -30,13 +30,22 @@
                                                 </div>
                                             {% endfor %}
                                         </div>
+                                        {% if form.errors %}
+                                        {% for field in form %}
+                                           {% for error in field.errors %}
+                                           <div class="alert alert-danger">
+                                               <strong>{{ error|escape }}</strong>
+                                           </div>
+                                           {% endfor %}
+                                         {% endfor %}
+                                       {% endif %}   
                                         <div class="form-group">
-                                            <label>Username </label>
-                                            <input type="text" name="username" required="">
+                                            <label>Email </label>
+                                            <input type="text" name="email" required="">
                                         </div>
                                         <div class="form-group">
                                             <label>Password</label>
-                                            <input type="password" name="password" required="">
+                                            <input type="password" name="password1" required="">
                                         </div>
                                         <div class="form-group message-btn">
                                             <button type="submit" class="theme-btn btn-one">Sign in</button>
@@ -48,7 +57,7 @@
                                     </div>
                                 </div>
                             </div> 
-                             <div class="tab" id="tab-2">
+                             <!-- <div class="tab" id="tab-2">
                                 <div class="inner-box">
                                    <div class="col-sm-8 offset-xl-2  ">
                                     <h4>Sign in</h4>
@@ -65,7 +74,7 @@
                                 </form> 
                                 </div>
                                 </div>
-                            </div> 
+                            </div>  -->
                         </div>
                     </div>
                 </div>

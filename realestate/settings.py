@@ -69,6 +69,9 @@ TEMPLATES = [
     },
 ]
 
+AUTH_USER_MODEL = 'myapp.Account'
+
+
 WSGI_APPLICATION = 'realestate.wsgi.application'
 
 
@@ -124,7 +127,11 @@ STATIC_URL = 'static/'
 MEDIA_URL = 'media/'
 MEDIA_ROOT = BASE_DIR / 'media'
 
+
+
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+

@@ -2,12 +2,12 @@
 {% load static %}
 {% block main-content %}
       <!--Page Title-->
-      <section class="page-title centred" style="background-image: url(assets/images/background/page-title.jpg);">
+      <section class="page-title centred" style="background-image: url(/static/myapp/images/background/page-title.jpg);">
         <div class="auto-container">
             <div class="content-box clearfix">
                 <h1>Builder Details</h1>
                 <ul class="bread-crumb clearfix">
-                    <li><a href="index.html">Home</a></li>
+                    <li><a href="{% url 'home' %}">Home</a></li>
                     <li>Builder Details</li>
                 </ul>
             </div>
@@ -289,7 +289,7 @@
                     <div class="default-sidebar agent-sidebar">
                         <div class="agents-contact sidebar-widget">
                             <div class="widget-title">
-                                <h5>Contact To {{bui.name}}</h5>
+                                <h5>Contact To {{bui.name|title}}</h5>
                             </div>
                             <div class="form-inner">
                                 <form action="contact.html" method="post" class="default-form">

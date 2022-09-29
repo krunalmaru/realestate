@@ -3,6 +3,8 @@ from django.http import HttpResponseRedirect
 from django.contrib.auth import authenticate,login,logout
 from .models import ContactInquiry,Builder,Scheam
 from django.contrib.auth.models import User
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.views import LoginView, LogoutView
 from django.contrib import auth
 from django.contrib import messages
 from .forms import BuilderForm, AddscheamForm,UserSignupform
@@ -10,7 +12,6 @@ from  django.views import View
 from django.db.models import Q
 from django.core.paginator import Paginator
 # makeCreate your views here.
-
 
 def home(request):
     ourbui = Builder.objects.all()   
@@ -28,48 +29,23 @@ def signup(request):
             messages.success(request,'your account created successfully')
             form = UserSignupform()
             return redirect('login')
-
-        # username = request.POST.get('username')
-        # email = request.POST.get('email')
-        # password = request.POST.get('password')
-        # confirmpass = request.POST.get('confirmpass')
-
-        # if password == confirmpass:
-        #     if User.objects.filter(username=username).exists():
-        #         messages.error(request, 'User Already exist')               
-        #         return redirect('signup')
-        #     else:
-        #         myuser = User.objects.create_user(username=username, email=email, password=password)   
-        #         myuser.set_password(password)     
-        #         myuser.save()
-        #         messages.success(request,'your account created successfully')
     else:
         form = UserSignupform()
 
     return render(request, 'myapp/signup.html',{'form':form})
 
-def buidersignup(request):
-    if request.method == 'POST':
-        fm = BuilderForm(request.POST)
-        if fm.is_valid():
-            fm.save()
-            messages.success(request,'your account created successfully')
-            return HttpResponseRedirect('/')
-    else:
-        fm = BuilderForm()    
-    return render(request,'myapp/buildersignup.html',{'fm':fm})
+
 
 def userlogin(request):
     if request.method == 'POST':
-
-        username = request.POST['username']
-        password = request.POST['password']
-
-        user = authenticate(username=username, password=password)
-
+        email = request.POST['email']
+        password1 = request.POST['password1']
+        user =authenticate(email=email, password=password1)       
+        print(user)
         if user is not None:
-            login(request, user)
-            return redirect('home')
+            if user.is_active:
+                login(request, user)
+                return redirect('home')
         else:
             messages.error(request,'invalid credential')
             return redirect('login')
@@ -77,9 +53,36 @@ def userlogin(request):
         return render(request,'myapp/login.html')
 
 
-def buiderlogin(request):
+def buidersignup(request):
+    if request.method == 'POST':
+        fm = BuilderForm(request.POST)
+        if fm.is_valid():
+            fm.save()
+            messages.success(request,'your account created successfully')
+            return redirect('builderlogin')
+    else:
+        fm = BuilderForm()    
+    return render(request,'myapp/buildersignup.html',{'fm':fm})
 
-    return render(request, 'myapp/login.html')
+
+
+def buiderlogin(request):
+    if request.method == 'POST':
+        # form = AuthenticationForm(request=request, data=request.POST)
+        # if form.is_valid():
+        name = request.POST['name']
+        password = request.POST['password']
+
+        user = authenticate(username=name, password=password)
+        if user is not None:
+            login(request, user)
+            return redirect('home')
+        else:
+            messages.error(request,'invalid credential')
+            return redirect('builderlogin')
+    else:
+        # form = AuthenticationForm()
+         return render(request, 'myapp/builderlogin.html')
 
 
 def logout(request):

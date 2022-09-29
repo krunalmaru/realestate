@@ -142,8 +142,12 @@
                         </div>
                         {% else %}
                         <div class="sign-box">
-                            <a href="{% url 'login' %}"><i class="fas fa-user"></i>Sign In</a>
+                            <a href="{% url 'login' %}"><i class="fas fa-user"></i>Sign In</a><br>
+                            <a href="{% url 'builderlogin' %}"><i class="fas fa-user"></i>Builder Sign In</a>
+
                         </div>
+                       
+                    
                         {% endif %}
 
                     </div>
@@ -172,7 +176,7 @@
                                                 <!-- <li><a href="index-5.html">Home Agent</a></li> -->
                                                 <!-- <li><a href="index-rtl.html">RTL Home</a></li> -->
                                                
-                                                </li>
+                
                                             </ul>
                                         </li>
                                         <li class="dropdown"><a href="{% url 'builderlist' %}"><span>Listing</span></a>
