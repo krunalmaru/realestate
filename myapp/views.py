@@ -1,13 +1,14 @@
 from django.shortcuts import render,redirect, HttpResponse
 from django.http import HttpResponseRedirect
 from django.contrib.auth import authenticate,login,logout
-from .models import ContactInquiry,Builder,Scheam
+from .models import ContactInquiry,Builder,Scheam, profile
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.views import LoginView, LogoutView
 from django.contrib import auth
 from django.contrib import messages
-from .forms import BuilderForm, AddscheamForm,UserSignupform
+from django.contrib.auth.forms import UserCreationForm,AuthenticationForm 
+from .forms import BuilderForm, AddscheamForm, CustomeUserSignupform
 from  django.views import View 
 from django.db.models import Q
 from django.core.paginator import Paginator
@@ -18,19 +19,20 @@ def home(request):
     obj = Scheam.objects.filter(is_feature = True).order_by('id')
     ab = Scheam.objects.values_list('propertytype', flat=True).order_by('propertytype').distinct()
     lo = Scheam.objects.values_list('location', flat=True).order_by('location').distinct()
+   
     context = {'obj':obj ,'ourbui':ourbui, 'ab':ab, 'lo':lo}       
     return render(request ,'myapp/home.html', context)
 
 def signup(request):
     if request.method == 'POST':
-        form = UserSignupform(request.POST)
+        form = CustomeUserSignupform(request.POST)
         if form.is_valid():
             form.save()
             messages.success(request,'your account created successfully')
-            form = UserSignupform()
+            form = CustomeUserSignupform()
             return redirect('login')
     else:
-        form = UserSignupform()
+        form = CustomeUserSignupform()
 
     return render(request, 'myapp/signup.html',{'form':form})
 
@@ -39,13 +41,11 @@ def signup(request):
 def userlogin(request):
     if request.method == 'POST':
         email = request.POST['email']
-        password1 = request.POST['password1']
-        user =authenticate(email=email, password=password1)       
-        print(user)
+        password = request.POST['password']
+        user =authenticate(email=email, password=password)
         if user is not None:
-            if user.is_active:
-                login(request, user)
-                return redirect('home')
+            login(request, user)
+            return redirect('home')
         else:
             messages.error(request,'invalid credential')
             return redirect('login')
@@ -59,30 +59,32 @@ def buidersignup(request):
         if fm.is_valid():
             fm.save()
             messages.success(request,'your account created successfully')
+            fm = BuilderForm() 
             return redirect('builderlogin')
+
     else:
-        fm = BuilderForm()    
+        fm = BuilderForm() 
+        print("this is get")  
+
     return render(request,'myapp/buildersignup.html',{'fm':fm})
 
 
-
 def buiderlogin(request):
-    if request.method == 'POST':
-        # form = AuthenticationForm(request=request, data=request.POST)
-        # if form.is_valid():
-        name = request.POST['name']
-        password = request.POST['password']
-
-        user = authenticate(username=name, password=password)
-        if user is not None:
-            login(request, user)
-            return redirect('home')
-        else:
-            messages.error(request,'invalid credential')
-            return redirect('builderlogin')
+    if request.method == 'POST':     
+        form = BuilderLogin(request.POST)
+        if form.is_valid():
+            user = authenticate(
+                email=form.cleaned_data['email'],
+                password=form.cleaned_data['password']
+            )
+            if user is not None:
+                login(request, user)
+                return redirect('home')
+            else:
+                messages.error(request,'invalid credential')
+                return redirect('builderlogin')
     else:
-        # form = AuthenticationForm()
-         return render(request, 'myapp/builderlogin.html')
+        return render(request, 'myapp/builderlogin.html',{'form':form})
 
 
 def logout(request):

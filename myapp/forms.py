@@ -1,24 +1,35 @@
 from django import forms
 from django.contrib.auth.models import User
 from django.forms import ModelForm
-from django.contrib.auth.forms import UserCreationForm
-from .models import Scheam,Builder,Customer, Account
+from django.contrib.auth.forms import UserCreationForm,AuthenticationForm,UserChangeForm 
+from .models import Scheam,Builder,CustomUser, Builderpro
 import datetime
 
 
-class UserSignupform(UserCreationForm):    
+class CustomeUserSignupform(UserCreationForm):    
+    class Meta(UserCreationForm):
+        model = CustomUser
+        fields = ('email','name','password1','password2')
+
+class CustomeUserChangeform(UserChangeForm)  :
     class Meta:
-        model = Account
-        fields = ('username','email','password1','password2')
-     
+        model = CustomUser
+        fields = ('email',)
+        
+        
+class RegistrationForm(UserCreationForm):
+    agencyname = forms.CharField(max_length=255)
+    class Meta:
+        model = Builderpro
+        fields =  ('email','name','password1','password2','agencyname')
 
 class BuilderForm(forms.ModelForm):
     password = forms.CharField(widget=forms.PasswordInput)
     confirmpass =forms.CharField(label = 'Confirm Password',widget=forms.PasswordInput)
     class Meta:
         model = Builder
-        fields = ( 'buildername','email', 'mobile','agencyname','password','confirmpass')
-    
+        fields = '__all__'
+        error_messages = {'buildername':{'required':'Name is required'},}
 
 CHOICES = [
         ('AirConditioning','AirConditioning'),
@@ -35,9 +46,8 @@ CHOICES = [
 
 
 class AddscheamForm(forms.ModelForm):
-    amenites = forms.MultipleChoiceField(label="Amenities",choices=CHOICES, widget=forms.CheckboxSelectMultiple)
     builtyear = forms.DateField(initial=datetime.date.today)
     class Meta:
         model = Scheam
-        fields = ('image','name','scheamname','location','price','propertytype','size','amenites','storeroom','bedrooms','bathroom','builtyear','propertystatus','description','is_feature')
-        
+        fields = ('image','name','scheamname','location','price','propertytype','size','amenites','storeroom','zipcode','bedrooms','bathroom','builtyear','propertystatus','description','is_feature')
+         
