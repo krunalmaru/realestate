@@ -29,11 +29,18 @@ class CustomeUserAdmin(UserAdmin):
 
 admin.site.register(CustomUser, CustomeUserAdmin)   
 
+class BuilderInline(admin.TabularInline):
+    model = Builder
 
 
-@admin.register(Builder)
 class BuilderAdmin(admin.ModelAdmin):
-    list_display = ['id','buildername','email','mobile','agencyname']
+    inlines = (
+        BuilderInline,
+    )
+
+# @admin.register(Builder)
+# class BuilderAdmin(admin.ModelAdmin):
+#     list_display = ['id','buildername','email','mobile','agencyname']
 
 @admin.register(Customer)
 class CustomerAdmin(admin.ModelAdmin):
@@ -48,10 +55,11 @@ class ScheamAdmin(admin.ModelAdmin):
     list_display = ['id','name','scheamname','is_feature','amenites','builtyear','date','image','description']
    
 admin.site.register(ContactInquiry)
+admin.site.register(Builder)
 
 @admin.register(profile)
 class BuilderProfile(admin.ModelAdmin):
     list_display = ['id','profileimg','buildername','address','city','zipcode']
 
 admin.site.register(Customerpro)
-admin.site.register(Builderpro)
+admin.site.register(Builderpro, BuilderAdmin)

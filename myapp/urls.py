@@ -6,10 +6,9 @@ from myapp import views
 urlpatterns = [
 
     path('', views.home, name='home'),
-    path('signup/', views.signup, name='signup'),
-    path('buildersignup/', views.buidersignup, name='buildersignup'),
-    path('login/', views.userlogin, name='login'),
-    path('accounts/builderlogin/', views.buiderlogin, name='builderlogin'),
+    path('signup/', views.RegisterView.as_view(), name='signup'),
+    path('buildersignup/', views.RegisterViewBuilder.as_view(), name='buildersignup'),
+    path('login/', views.LoginViewUser.as_view(), name='login'),
     path('logout/', views.logout, name='logout'),
     path('contact/', views.contactus, name='contact'), 
     path('builderdetail/<int:id>/', views.builderdetail, name='builderdetail'),

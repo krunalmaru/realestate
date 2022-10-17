@@ -135,19 +135,20 @@
                             <li><a href=""><i class=""></i>{{request.user.name|capfirst}}</a></li>                            
                         </ul>
 
-                        {% if request.user.is_authenticated %}
+                        
     
                         <div class="sign-box">
+                            <!-- <a href="{% url 'buildersignup' %}"><i class="fas fa-user"></i>Builder Login</a> -->
+                            
+                        </div>
+                        
+                        <div class="sign-box">
+                            <a href="{% url 'login' %}"><i class="fas fa-user"></i>Login</a>&nbsp;&nbsp;
+                            <a href="{% url 'buildersignup' %}"><i class="fas fa-user"></i>Builder Signup</a>
                             <a href="{% url 'logout' %}"><i class="fas fa-user"></i>Logout</a>
                         </div>
-                        {% else %}
-                        <div class="sign-box">
-                            <a href="{% url 'login' %}"><i class="fas fa-user"></i>Login</a>&nbsp;
-                            <a href="{% url 'builderlogin' %}"><i class="fas fa-user"></i>Builder Login</a>
-
-                        </div>
                     
-                        {% endif %}
+                     
 
                     </div>
                 </div>

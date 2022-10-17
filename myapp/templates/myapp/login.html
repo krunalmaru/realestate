@@ -1,6 +1,11 @@
 {% extends 'myapp/base.html' %}
 {% load static %}
 {% block main-content %}
+<style>
+    .errorlist{
+        color: rgb(233, 52, 52);
+    }
+</style>
       <!-- ragister-section -->
       <section class="ragister-section centred sec-pad">
         <div class="auto-container">
@@ -21,31 +26,19 @@
                              <div class="tab active-tab" id="tab-1">
                                 <div class="inner-box">
                                     <h4>Sign in</h4>
-                                    <form action="{% url 'login' %}" method="POST" class="default-form">
-                                        {% csrf_token %}
-                                        <div class="form-group">
-                                            {% for message in messages %}
-                                                <div class="alert alert-danger" role="alert">
-                                                    {{message}}
-                                                </div>
-                                            {% endfor %}
-                                        </div>
-                                        {% if form.errors %}
-                                        {% for field in form %}
-                                           {% for error in field.errors %}
-                                           <div class="alert alert-danger">
-                                               <strong>{{ error|escape }}</strong>
-                                           </div>
-                                           {% endfor %}
-                                         {% endfor %}
-                                       {% endif %}   
+                                    <form action="{% url 'login' %}" method="POST" novalidate class="default-form">
+                                    {% csrf_token %}
+
+                                    {{form.non_field_errors}}  
                                         <div class="form-group">
                                             <label>Email </label>
-                                            <input type="text" name="email" required="">
+                                            {{form.username}}
+                                            {{form.username.errors}}
                                         </div>
                                         <div class="form-group">
                                             <label>Password</label>
-                                            <input type="password" name="password" required="">
+                                            {{form.password}}
+                                            {{form.password.errors}}
                                         </div>
                                         <div class="form-group message-btn">
                                             <button type="submit" class="theme-btn btn-one">Sign in</button>

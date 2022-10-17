@@ -5,10 +5,13 @@ from .models import ContactInquiry,Builder,Scheam, profile
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.views import LoginView, LogoutView
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib import auth
+from django.views.generic import CreateView
+from django.urls import reverse_lazy
 from django.contrib import messages
 from django.contrib.auth.forms import UserCreationForm,AuthenticationForm 
-from .forms import BuilderForm, AddscheamForm, CustomeUserSignupform
+from .forms import BuilderForm, AddscheamForm, CustomeUserSignupform, RegistarionForm, RegistrationFormBuilder
 from  django.views import View 
 from django.db.models import Q
 from django.core.paginator import Paginator
@@ -23,68 +26,86 @@ def home(request):
     context = {'obj':obj ,'ourbui':ourbui, 'ab':ab, 'lo':lo}       
     return render(request ,'myapp/home.html', context)
 
-def signup(request):
-    if request.method == 'POST':
-        form = CustomeUserSignupform(request.POST)
-        if form.is_valid():
-            form.save()
-            messages.success(request,'your account created successfully')
-            form = CustomeUserSignupform()
-            return redirect('login')
-    else:
-        form = CustomeUserSignupform()
+# def signup(request):
+#     if request.method == 'POST':
+#         form = CustomeUserSignupform(request.POST)
+#         if form.is_valid():
+#             form.save()
+#             messages.success(request,'your account created successfully')
+#             form = CustomeUserSignupform()
+#             return redirect('login')
+#     else:
+#         form = CustomeUserSignupform()
 
-    return render(request, 'myapp/signup.html',{'form':form})
+#     return render(request, 'myapp/signup.html',{'form':form})
 
+class RegisterView(CreateView):
+    form_class = RegistarionForm
+    template_name = "myapp/signup.html"
+    success_url = reverse_lazy('home')
 
+class LoginViewUser(LoginView):
+    template_name = 'myapp/login.html'
 
-def userlogin(request):
-    if request.method == 'POST':
-        email = request.POST['email']
-        password = request.POST['password']
-        user =authenticate(email=email, password=password)
-        if user is not None:
-            login(request, user)
-            return redirect('home')
-        else:
-            messages.error(request,'invalid credential')
-            return redirect('login')
-    else:     
-        return render(request,'myapp/login.html')
-
-
-def buidersignup(request):
-    if request.method == 'POST':
-        fm = BuilderForm(request.POST)
-        if fm.is_valid():
-            fm.save()
-            messages.success(request,'your account created successfully')
-            fm = BuilderForm() 
-            return redirect('builderlogin')
-
-    else:
-        fm = BuilderForm() 
-        print("this is get")  
-
-    return render(request,'myapp/buildersignup.html',{'fm':fm})
+class RegisterViewBuilder(LoginRequiredMixin,CreateView):
+    template_name = 'myapp/buildersignup.html'
+    form_class = RegistrationFormBuilder
+    success_url = reverse_lazy('home')
+    def form_valid(self, form):
+        user = self.request.user
+        user.type.append(user.Types.BUILDER)
+        user.save()
+        form.instance.buildername = self.request.user
+        return super().form_valid(form)
 
 
-def buiderlogin(request):
-    if request.method == 'POST':     
-        form = BuilderLogin(request.POST)
-        if form.is_valid():
-            user = authenticate(
-                email=form.cleaned_data['email'],
-                password=form.cleaned_data['password']
-            )
-            if user is not None:
-                login(request, user)
-                return redirect('home')
-            else:
-                messages.error(request,'invalid credential')
-                return redirect('builderlogin')
-    else:
-        return render(request, 'myapp/builderlogin.html',{'form':form})
+# def userlogin(request):
+#     if request.method == 'POST':
+#         email = request.POST['email']
+#         password = request.POST['password']
+#         user =authenticate(email=email, password=password)
+#         if user is not None:
+#             login(request, user)
+#             return redirect('home')
+#         else:
+#             messages.error(request,'invalid credential')
+#             return redirect('login')
+#     else:     
+#         return render(request,'myapp/login.html')
+
+
+# def buidersignup(request):
+#     if request.method == 'POST':
+#         fm = BuilderForm(request.POST)
+#         if fm.is_valid():
+#             fm.save()
+#             messages.success(request,'your account created successfully')
+#             fm = BuilderForm() 
+#             return redirect('builderlogin')
+
+#     else:
+#         fm = BuilderForm() 
+#         print("this is get")  
+
+#     return render(request,'myapp/buildersignup.html',{'fm':fm})
+
+
+# def buiderlogin(request):
+#     if request.method == 'POST':     
+#         form = BuilderLogin(request.POST)
+#         if form.is_valid():
+#             user = authenticate(
+#                 email=form.cleaned_data['email'],
+#                 password=form.cleaned_data['password']
+#             )
+#             if user is not None:
+#                 login(request, user)
+#                 return redirect('home')
+#             else:
+#                 messages.error(request,'invalid credential')
+#                 return redirect('builderlogin')
+#     else:
+#         return render(request, 'myapp/builderlogin.html',{'form':form})
 
 
 def logout(request):

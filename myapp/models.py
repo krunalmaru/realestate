@@ -49,7 +49,6 @@ class Customer(models.Model):
 
 class Builder(models.Model):
     buildername = models.OneToOneField(CustomUser, on_delete=models.CASCADE)
-    email = models.EmailField()
     mobile = models.BigIntegerField(null=True) 
     agencyname = models.CharField(max_length=100)  
    

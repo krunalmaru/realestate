@@ -11,10 +11,21 @@ class CustomeUserSignupform(UserCreationForm):
         model = CustomUser
         fields = ('email','name','password1','password2')
 
+class RegistarionForm(UserCreationForm):
+    class Meta(UserCreationForm):
+        model = Builderpro
+        fields = ('email','name','password1','password2')
+
+class RegistrationFormBuilder(forms.ModelForm):
+    class Meta:
+        model = Builder
+        fields = ('mobile','agencyname')
+
 class CustomeUserChangeform(UserChangeForm)  :
     class Meta:
         model = CustomUser
         fields = ('email',)
+
         
         
 class RegistrationForm(UserCreationForm):

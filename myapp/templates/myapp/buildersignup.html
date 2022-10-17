@@ -1,6 +1,11 @@
 {% extends 'myapp/base.html' %}
 {% load  static %}
 {% block main-content %}
+<style>
+    .errorlist{
+        color: rgb(233, 52, 52);
+    }
+</style>
 <section class="ragister-section centred sec-pad">
     <div class="auto-container">
         <div class="row clearfix">
@@ -21,42 +26,21 @@
                         <div class="tab active-tab" id="tab-1">
                             <div class="inner-box">
                                 <h4>Sign up</h4>    
-                                {% if form.non_field_errors %}
-                                {% for errors in form.non_field_errors  %}
-                                    <p class="alert alert-danger my-3">{{errors}}</p>
-                                {% endfor %}
-                                {% endif %} 
-                                <form action="" method="POST"  class="default-form" novalidate>
+                                {{form.non_field_errors}}
+                                <form action="{% url 'buildersignup' %}" method="POST"  class="default-form" novalidate>
                                     {% csrf_token %}
                                    
+                                 
                                     <div class="form-group">
-                                        {{fm.username.label_tag}}
-                                        {{fm.username |capfirst}}
-                                        
+                                        {{form.mobile.label_tag}}
+                                        {{form.mobile}}
+                                        {{form.mobile.errors}}
                                     </div>
                                     <div class="form-group">
-                                        {{fm.email.label_tag}}
-                                        {{fm.email}}
-                                    </div>
-                                    <div class="form-group">
-                                        {{fm.mobile.label_tag}}
-                                        {{fm.mobile}}
-                                    </div>
-                                    <div class="form-group">
-                                        {{fm.agencyname.label_tag}}
-                                        {{fm.agencyname}}
-                                    </div>
-                                    <div class="form-group">
-                                        {{fm.address.label_tag}}
-                                        {{fm.address}}
-                                    </div>
-                                    <div class="form-group">
-                                        {{fm.password.label_tag}}
-                                        {{fm.password}}
-                                    </div>
-                                    <div class="form-group">
-                                        {{fm.confirmpass.label_tag}}
-                                        {{fm.confirmpass}}
+                                        {{form.agencyname.label_tag}}
+                                        {{form.agencyname}}
+                                        {{form.agency.errors}}
+
                                     </div>
                                     <div class="form-group message-btn">
                                         <button type="submit" class="theme-btn btn-one">Sign up</button>
@@ -65,7 +49,7 @@
                             
                                 
                                 <div class="othre-text My-">
-                                    <p>Already have an account? <a href="{% url 'builderlogin' %}">Sign in</a></p>
+                                    <p>Already have an account? <a href="{% url 'login' %}">Sign in</a></p>
                                 </div>
                             </div>
                         </div>
