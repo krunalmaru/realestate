@@ -52,9 +52,9 @@ class Builder(models.Model):
     mobile = models.BigIntegerField(null=True) 
     agencyname = models.CharField(max_length=100)  
    
+   
     def __str__(self):
         return self.buildername.name
-
     
 class CustomerManager(models.Manager):
     def get_queryset(self, *args, **kwargs):

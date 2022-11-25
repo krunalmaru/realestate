@@ -19,7 +19,8 @@ class RegistarionForm(UserCreationForm):
 class RegistrationFormBuilder(forms.ModelForm):
     class Meta:
         model = Builder
-        fields = ('mobile','agencyname')
+        fields = ('mobile','agencyname')    
+  
 
 class CustomeUserChangeform(UserChangeForm)  :
     class Meta:

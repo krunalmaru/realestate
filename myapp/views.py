@@ -1,4 +1,4 @@
-from django.shortcuts import render,redirect, HttpResponse
+from django.shortcuts import render,redirect,HttpResponse
 from django.http import HttpResponseRedirect
 from django.contrib.auth import authenticate,login,logout
 from .models import ContactInquiry,Builder,Scheam, profile
@@ -51,13 +51,13 @@ class RegisterViewBuilder(LoginRequiredMixin,CreateView):
     template_name = 'myapp/buildersignup.html'
     form_class = RegistrationFormBuilder
     success_url = reverse_lazy('home')
-    def form_valid(self, form):
+    def form_valid(self, form):    
         user = self.request.user
         user.type.append(user.Types.BUILDER)
         user.save()
         form.instance.buildername = self.request.user
         return super().form_valid(form)
-
+   
 
 # def userlogin(request):
 #     if request.method == 'POST':
@@ -109,6 +109,7 @@ class RegisterViewBuilder(LoginRequiredMixin,CreateView):
 
 
 def logout(request):
+    # if request.sess
     auth.logout(request)
     return redirect('login')
 
@@ -195,3 +196,6 @@ def search(request):
         new = Scheam.objects.filter(look).distinct()
     context = {'new':new}
     return render(request,'myapp/search.html', context)
+
+ 
+
